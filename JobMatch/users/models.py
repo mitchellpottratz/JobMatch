@@ -26,11 +26,6 @@ class User(AbstractUser):
 	# if the user has confirmed their email address
 	email_confirmed = models.BooleanField(default=False)
 
-	# # changes the username field to the email field
-	# USERNAME_FIELD = 'email'
-
-	# # dont know why this is needed but only works with
-	# REQUIRED_FIELDS = ['email']
 
 
 
