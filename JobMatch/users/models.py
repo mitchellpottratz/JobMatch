@@ -1,12 +1,13 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser, PermissionsMixin
+from django.contrib.auth.models import AbstractUser
+from django.utils import timezone
+
 
 # User model
 # costumizes django's default User model
 class User(AbstractUser):
 
-	# removes the usernae field
-	username = None
+	username = models.CharField(max_length=155, unique=True, blank=True)
 
 	# profile picture
 	image = models.ImageField(blank=True)
@@ -19,15 +20,21 @@ class User(AbstractUser):
 	# looking for job.
 	candidate_user = models.BooleanField(default=False)
 
-	# makes the first_name, last_name and email field all required
-	first_name = models.CharField(max_length=150, blank=False)
-	last_name = models.CharField(max_length=150, blank=False)
-	email = models.EmailField(unique=True, blank=False)
+	# makes the email field all required
+	email = models.EmailField(unique=True)
 
 	# if the user has confirmed their email address
 	email_confirmed = models.BooleanField(default=False)
 
-	# changes the username field to the email field
-	USERNAME_FIELD = 'email'
+	# # changes the username field to the email field
+	# USERNAME_FIELD = 'email'
 
-	REQUIRED_FIELDS = []
+	# # dont know why this is needed but only works with
+	# REQUIRED_FIELDS = ['email']
+
+
+
+
+
+
+

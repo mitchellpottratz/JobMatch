@@ -2,5 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-	path('test/', views.test, name='test')
+
+	# path where company users intially register
+	path('register/', views.register, name='register')
 ]

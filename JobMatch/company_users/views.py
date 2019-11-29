@@ -1,5 +1,11 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from users.models import User
+from .models import Company
 
-def test(request):
+
+# this view is where people register for a CompanyUser account
+def register(request):
 	return HttpResponse('company users working')
+
+
+
