@@ -6,7 +6,6 @@ from django.utils import timezone
 # User model
 # costumizes django's default User model
 class User(AbstractUser):
-
 	username = models.CharField(max_length=155, unique=True, blank=True)
 
 	# profile picture
