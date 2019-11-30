@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-
-	# path where company users intially register
-	path('register/', views.register, name='register')
+	
+	# this is where company users can join a company with an invite code
+	path('join/', views.join, name='join'),
 ]
