@@ -7,7 +7,7 @@ from django.utils import timezone
 # apart of
 class Company(models.Model):
 	name = models.CharField(max_length=150)
-	image = models.ImageField(blank=True)
+	image = models.ImageField(blank=True, upload_to='company/')
 
 	# admin user of the company 
 	admin = models.OneToOneField(User, on_delete=models.CASCADE)
