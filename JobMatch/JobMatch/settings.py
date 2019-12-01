@@ -122,6 +122,10 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"), 
 ]
 
+# configures folder for storing images
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 # tells django where to look for the user model
 AUTH_USER_MODEL = 'users.User'
 

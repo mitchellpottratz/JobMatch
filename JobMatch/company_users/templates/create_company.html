@@ -10,13 +10,12 @@
 			<div class="card">
 				<div class="card-body">
 					<h5 class="card-title">Create Company</h5>
-					<form class="mb-3" method="POST">
+					<form class="mb-3" method="POST" enctype="multipart/form-data">
 						{% csrf_token %}
 						<div class="form-group">
 							<label>Company Name</label>
 							{{ form.name }}
 						</div>
-
 						<div class="form-group">
 							<label>Company Image</label>
 							{{ form.image }}
