@@ -8,7 +8,13 @@ from .models import Company
 # this view is where registered company users can join 
 # a company by using the companies invite code
 def join(request):
-	return HttpResponse('join company page')
+	return render(request, 'join.html')
+
+
+# this view is where registered company users can create 
+# a new company
+def create_company(request):
+	pass
 
 
 
