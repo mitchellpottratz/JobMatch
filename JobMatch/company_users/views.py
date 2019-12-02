@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login
 from users.models import User
 from .models import Company
 from .forms import CompanyForm
+from .invite_code import generate_invite_code
 
 
 # this view is where registered company users can join 
@@ -26,7 +27,7 @@ def create_company(request):
 		if form.is_valid():
 			company = form.save(commit=False)
 			company.admin = request.user
-			company.invite_code = 'generate_invite_code'
+			company.invite_code = generate_invite_code()
 			company.save()
 			print('company created')
 			return redirect('/company-users/company')
