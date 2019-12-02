@@ -1,3 +1,11 @@
 from django.db import models
+from django.conf import settings
+from django.utils import timezone
 
-# Create your models here.
+
+# this model holds all of the users information such as;
+# headline, bio, location and phone number
+class CandidateInfo(models.Model):
+	pass
+
+

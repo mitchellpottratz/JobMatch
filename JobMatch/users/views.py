@@ -38,7 +38,7 @@ def register(request):
 			else:
 				# take them to the page where they fill out the 
 				# rest of their account information
-				return redirect('/candidate-users/info/')
+				return redirect('/candidate-users/complete-info/')
 		else:
 			print(form.errors)
 

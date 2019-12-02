@@ -28,7 +28,10 @@ INSTALLED_APPS = [
     # my apps
     'users.apps.UsersConfig',
     'company_users.apps.CompanyUsersConfig',
-    'candidate_users.apps.CompanyUsersConfig',
+    'candidate_users.apps.CandidateUsersConfig',
+
+    # installed packages
+    'location_field.apps.DefaultConfig',
 ]
 
 MIDDLEWARE = [
