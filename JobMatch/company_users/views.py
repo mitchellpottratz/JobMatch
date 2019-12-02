@@ -18,7 +18,18 @@ def join(request):
 		code = request.POST.get('code')
 
 		try:
+			# gets the company by the invite code from the form
 			company = Company.objects.get(invite_code=code)
+
+			# adds the current user to whatever company the invite 
+			# code was for
+			user = request.user
+			user.company_account = company
+			user.save()
+
+			return redirect('/success/')
+
+		# if the invite code does not exist 	
 		except Company.DoesNotExists:
 			print('company code does not exist')
 

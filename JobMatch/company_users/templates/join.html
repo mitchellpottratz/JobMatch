@@ -11,6 +11,7 @@
 				<div class="card-body">
 					<h5 class="card-title">Join A Company</h5>
 					<form class="mb-3" method="POST">
+						{% csrf_token %}
 						<div class="form-group">
 							<label for="code">Invite Code</label>
 							<input type="text" class="form-control" name="code" placeholder="Invite Code">
