@@ -20,11 +20,16 @@ def create_company(request):
 	if request.method == 'POST':
 
 		# creates a new form instance passing in the data
-		form = CompanyForm(request.POST)
+		form = CompanyForm(request.POST, request.FILES)
 
 		# if the form is valid
 		if form.is_valid():
-			pass
+			company = form.save(commit=False)
+			company.admin = request.user
+			company.invite_code = 'generate_invite_code'
+			company.save()
+			print('company created')
+			return redirect('/company-users/company')
 
 	# if the https method is GET
 	else:
@@ -32,6 +37,10 @@ def create_company(request):
 		form = CompanyForm() 
 		
 	return render(request, 'create_company.html', {'form': form})
+
+
+def new_company(request):
+	return HttpResponse('company created')
 
 
 
