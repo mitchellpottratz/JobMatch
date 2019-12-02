@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from company_users.models import Company
 from django.utils import timezone
 
 
@@ -18,6 +19,9 @@ class User(AbstractUser):
 	# if the use is just a candidate user, a user that is just
 	# looking for job.
 	candidate_user = models.BooleanField(default=False)
+
+	# the company the user is apart of, this field is only used if the user is a company_user
+	company_account = models.ForeignKey(Company, blank=True, null=True, on_delete=models.CASCADE)
 
 	# makes the email field all required
 	email = models.EmailField(unique=True)

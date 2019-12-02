@@ -1,5 +1,5 @@
 from django.db import models
-from users.models import User
+from django.conf import settings
 from django.utils import timezone
 
 
@@ -10,7 +10,7 @@ class Company(models.Model):
 	image = models.ImageField(blank=True, upload_to='company/')
 
 	# admin user of the company 
-	admin = models.OneToOneField(User, on_delete=models.CASCADE)
+	admin = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
 	# code to invite other users to the company
 	invite_code = models.CharField(max_length=15)

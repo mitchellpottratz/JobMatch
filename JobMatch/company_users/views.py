@@ -10,6 +10,18 @@ from .invite_code import generate_invite_code
 # this view is where registered company users can join 
 # a company by using the companies invite code
 def join(request):
+
+	# if the form was submitted
+	if request.method == 'POST':
+
+		# gets the invite code from the form
+		code = request.POST.get('code')
+
+		try:
+			company = Company.objects.get(invite_code=code)
+		except Company.DoesNotExists:
+			print('company code does not exist')
+
 	return render(request, 'join.html')
 
 
@@ -26,10 +38,9 @@ def create_company(request):
 		# if the form is valid
 		if form.is_valid():
 			company = form.save(commit=False)
-			company.admin = request.user
-			company.invite_code = generate_invite_code()
+			company.admin = request.user # the user that created th company becomes the admin
+			company.invite_code = generate_invite_code() # generates random invite code string
 			company.save()
-			print('company created')
 			return redirect('/company-users/company')
 
 	# if the https method is GET

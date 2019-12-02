@@ -16,8 +16,6 @@ def register(request):
 		# pass the form data to the RegisterForm
 		form = RegisterForm(request.POST)
 
-		print('checkbox:', form['company_user'].value())
-
 		# if the form is valid
 		if form.is_valid():
 	
@@ -40,7 +38,7 @@ def register(request):
 			else:
 				# take them to the page where they fill out the 
 				# rest of their account information
-				print('user is a candidate user')
+				return redirect('/candidate-users/info/')
 		else:
 			print(form.errors)
 
