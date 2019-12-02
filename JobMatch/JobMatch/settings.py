@@ -32,6 +32,7 @@ INSTALLED_APPS = [
 
     # installed packages
     'location_field.apps.DefaultConfig',
+    'phone_field',
 ]
 
 MIDDLEWARE = [
