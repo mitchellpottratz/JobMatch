@@ -14,7 +14,7 @@ class CandidateInfo(models.Model):
 	
 	# city and location store the users location
 	city = models.CharField(max_length=255, default='')
-	location = PlainLocationField(based_fields=['city'], zoom=7, default='')
+	# location = PlainLocationField(based_fields=['city'], zoom=7, default='')
 
 	headline = models.CharField(max_length=75, blank=True, null=True)
 	bio = models.TextField(max_length=500, blank=True, null=True)
