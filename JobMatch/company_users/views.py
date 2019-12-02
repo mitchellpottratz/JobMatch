@@ -41,8 +41,7 @@ def join(request):
 
 		# if the invite code does not exist 	
 		except ObjectDoesNotExist:
-			print('company code does not exist')
-
+			
 			# creates error message to show to the user
 			messages.error(request, 'The invite code you entered does not exist')
 
