@@ -14,6 +14,9 @@ class CompanyForm(ModelForm):
 		self.fields['name'].widget.attrs.update({
 			'class': 'form-control'
 		})
+
+		# *- STYLE THE IMAGE FIELD LATER -*
+		
 		# self.fields['image'].widget.attrs.update({
 			
 		# })
