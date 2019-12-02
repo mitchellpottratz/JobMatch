@@ -1,9 +1,19 @@
+
+# django imports 
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from django.core.exceptions import ObjectDoesNotExist
+
+# model imports
 from users.models import User
 from .models import Company
+
+# form imports 
 from .forms import CompanyForm
+
+# imports function that generates a companies invite code
 from .invite_code import generate_invite_code
 
 
@@ -30,8 +40,11 @@ def join(request):
 			return redirect('/success/')
 
 		# if the invite code does not exist 	
-		except Company.DoesNotExists:
+		except ObjectDoesNotExist:
 			print('company code does not exist')
+
+			# creates error message to show to the user
+			messages.error(request, 'The invite code you entered does not exist')
 
 	return render(request, 'join.html')
 

@@ -10,6 +10,15 @@
 			<div class="card">
 				<div class="card-body">
 					<h5 class="card-title">Join A Company</h5>
+
+					{% if messages %}
+						{% for message in messages %}
+							<small class="text-danger text-center">
+								{{ message }}
+							</small>
+						{% endfor %}
+					{% endif %}
+
 					<form class="mb-3" method="POST">
 						{% csrf_token %}
 						<div class="form-group">
