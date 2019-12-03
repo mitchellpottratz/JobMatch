@@ -16,6 +16,8 @@ class CandidateInfo(models.Model):
 	city = models.CharField(max_length=255, default='')
 	# location = PlainLocationField(based_fields=['city'], zoom=7, default='')
 
+	resume = models.FileField(blank=True, upload_to='resumes/')
+
 	headline = models.CharField(max_length=75, blank=True, null=True)
 	bio = models.TextField(max_length=500, blank=True, null=True)
 	phone_number = PhoneField(blank=True)
