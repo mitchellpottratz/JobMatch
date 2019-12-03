@@ -1,8 +1,16 @@
+
+# django imports
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login as auth_login
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib import messages
+
+# model imports 
 from users.models import User
 from company_users.models import Company
+
+# form imports 
 from .forms import RegisterForm
 
 
@@ -27,7 +35,7 @@ def register(request):
 				username=form.cleaned_data.get('username'),
 				password=form.cleaned_data.get('password1')
 			)
-			login(request, user)
+			auth_login(request, user)
 
 			# if the user is a company user
 			if user.company_user:
@@ -52,6 +60,36 @@ def register(request):
 # this is where candidate or company users login
 def login(request):
 
+	# if the form was submitted
+	if request.method == 'POST':
+
+		username = request.POST['username']
+		password = request.POST['password']
+
+		# authenticates the user with the username and password
+		# from the form
+		user = authenticate(
+			username=username,
+			password=password
+		)
+
+		# if the user exists
+		if user is not None:
+			# logs in the user
+			auth_login(request, user)
+
+			# if the user is a company_user
+			if user.company_user:
+				return redirect('/company-users/join/')
+
+			# if the user is a candidate user
+			else:
+				return redirect('/candidate-users/complete-info/')
+
+		# if the user does not exist
+		else:
+			# creates error message to show the client
+			messages.error(request, 'The username or password is incorrect')
 
 	return render(request, 'login.html')
 
