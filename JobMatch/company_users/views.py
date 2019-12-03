@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.decorators import login_required
 
 # model imports
 from users.models import User
@@ -16,9 +17,14 @@ from .forms import CompanyForm
 # imports function that generates a companies invite code
 from .invite_code import generate_invite_code
 
+# imports decorator that checks if the current user is apart of a company
+from .decorators import no_company
+
 
 # this view is where registered company users can join 
 # a company by using the companies invite code
+@login_required
+@no_company
 def join(request):
 
 	# if the form was submitted
@@ -50,6 +56,8 @@ def join(request):
 
 # this view is where registered company users can create 
 # a new company
+@login_required
+@no_company
 def create_company(request):
 
 	# if the form was submitted
