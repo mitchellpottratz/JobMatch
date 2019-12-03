@@ -49,6 +49,23 @@ def register(request):
 	return render(request, 'register.html', {'form': form})
 
 
+# this is where candidate or company users login
+def login(request):
+
+
+	return render(request, 'login.html')
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
