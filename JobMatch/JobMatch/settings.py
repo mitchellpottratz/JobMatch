@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'company_users.apps.CompanyUsersConfig',
     'candidate_users.apps.CandidateUsersConfig',
+    'company_account.apps.CompanyAccountConfig',
 
     # installed packages
     'location_field.apps.DefaultConfig',

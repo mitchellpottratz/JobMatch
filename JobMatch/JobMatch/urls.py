@@ -17,6 +17,10 @@ urlpatterns = [
 
     # where candidate users fill out their information after registering
     path('candidate-users/', include('candidate_users.urls')),
+
+    # company users main dashboard
+    path('company-account/', include('company_account.urls')),
+
 ] 
 
 # configures the path for where images will be updated to
