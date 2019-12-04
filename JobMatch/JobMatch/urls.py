@@ -26,6 +26,9 @@ urlpatterns = [
     # this app handles the logic for adding and finding skills
     path('skills/', include('skills.urls')),
 
+    # text editor package
+    path('tinymce/', include('tinymce.urls')),
+
 ] 
 
 # configures the path for where images will be updated to
