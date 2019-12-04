@@ -117,9 +117,6 @@ USE_TZ = True
 # configures static folder to load css, js and images
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, "static"), 
-# ]
 
 
 # configures folder for storing images
@@ -128,6 +125,17 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # tells django where to look for the user model
 AUTH_USER_MODEL = 'users.User'
+
+
+# configuration for tinymce text editor
+TINYMCE_DEFAULT_CONFIG = {
+    'plugins': "table,spellchecker,paste,searchreplace",
+    'theme': "advanced",
+    'cleanup_on_startup': True,
+    'custom_undo_redo_levels': 10,
+}
+TINYMCE_SPELLCHECKER = True
+TINYMCE_COMPRESSOR = True
 
 
 
