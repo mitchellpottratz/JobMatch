@@ -30,6 +30,14 @@ class User(AbstractUser):
 	email_confirmed = models.BooleanField(default=False)
 
 
+	# returns users first and last name
+	def get_full_name(self):
+		return self.first_name + ' ' + self.last_name
+
+	# returns the users username with @ prepended
+	def format_username(self):
+		return '@' + self.username
+
 
 
 

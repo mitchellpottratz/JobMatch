@@ -1,0 +1,23 @@
+{% extends 'company_account/base.html' %}
+
+{% block title %}<title>Company User Dashboard</title>{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block body %}
+	<div class="card" class="account-header">
+		<div class="card-body">
+	    	<div class="d-flex">
+	    		<img src="/media/users/default_profile_picture.png" class="img-fluid" alt="profile picture">	
+	    		<div class="px-4">
+	    			<h3>{{ user.get_full_name }}</h3>
+	    			<h6 class="text-muted">{{ user.format_username }}</h6>
+	    			<h6 class="text-muted">{{ user.email }}</h6>
+	    		</div>
+	    	</div>
+	  	</div>
+	</div>
+{% endblock %}
+
+
+

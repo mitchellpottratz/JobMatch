@@ -41,7 +41,7 @@ def complete_info(request):
 	else:
 		form = CandidateInfoForm()
 
-	return render(request, 'candidate_info.html', {'form': form})
+	return render(request, 'candidate_users/candidate_info.html', {'form': form})
 
 
 

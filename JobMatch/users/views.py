@@ -54,7 +54,7 @@ def register(request):
 	else:
 		form = RegisterForm()
 
-	return render(request, 'register.html', {'form': form})
+	return render(request, 'users/register.html', {'form': form})
 
 
 # this is where candidate or company users login
@@ -91,7 +91,7 @@ def login(request):
 			# creates error message to show the client
 			messages.error(request, 'The username or password is incorrect')
 
-	return render(request, 'login.html')
+	return render(request, 'users/login.html')
 
 
 

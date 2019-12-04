@@ -43,7 +43,7 @@ def join(request):
 			user.company_account = company
 			user.save()
 
-			return redirect('/success/')
+			return redirect('/company-account/index')
 
 		# if the invite code does not exist 	
 		except ObjectDoesNotExist:
@@ -51,7 +51,7 @@ def join(request):
 			# creates error message to show to the user
 			messages.error(request, 'The invite code you entered does not exist')
 
-	return render(request, 'join.html')
+	return render(request, 'company_users/join.html')
 
 
 # this view is where registered company users can create 
@@ -72,14 +72,14 @@ def create_company(request):
 			company.admin = request.user # the user that created th company becomes the admin
 			company.invite_code = generate_invite_code() # generates random invite code string
 			company.save()
-			return redirect('/company-users/company')
+			return redirect('/company-account/index')
 
 	# if the https method is GET
 	else:
 		# creates a form instance with no data
 		form = CompanyForm() 
 		
-	return render(request, 'create_company.html', {'form': form})
+	return render(request, 'company_users/create_company.html', {'form': form})
 
 
 def new_company(request):

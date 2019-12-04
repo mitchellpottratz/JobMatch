@@ -10,6 +10,17 @@ from .decorators import company_account_required
 @login_required
 @company_account_required
 def index(request):
-	return render(request, 'index.html')
+	# gets the current user
+	user = request.user
+
+	# gets the users company
+	company = request.user.company_account
+
+	# data being passed into the template
+	context = {
+		'user': user,
+		'company': company
+	}
+	return render(request, 'company_account/index.html', context)
 
 
