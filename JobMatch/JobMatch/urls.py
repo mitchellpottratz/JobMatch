@@ -21,6 +21,11 @@ urlpatterns = [
     # company users main dashboard
     path('company-account/', include('company_account.urls')),
 
+    path('job_posts/', include('job_posts.urls')),
+
+    # this app handles the logic for adding and finding skills
+    path('skills/', include('skills.urls')),
+
 ] 
 
 # configures the path for where images will be updated to
