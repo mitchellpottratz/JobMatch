@@ -1,6 +1,7 @@
 # django imports 
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.forms.models import model_to_dict
 from django.contrib.auth.decorators import login_required
 
 # model imports 
@@ -37,9 +38,13 @@ def search(request):
 	# get the search string from the ajax call
 	skill = request.GET.get('skill_string')
 
-	print('skill:', skill)
+	# searches for skills based on the string
+	results = Skill.objects.filter(name__icontains=skill)
 
-	return JsonResponse({'data': skill})
+	# converts the results to a list of skill names
+	results_list = [model_to_dict(result)['name'] for result in results]
+
+	return JsonResponse({'results': results_list})
 
 
 
