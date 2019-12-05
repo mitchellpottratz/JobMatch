@@ -116,8 +116,10 @@ USE_TZ = True
 
 # configures static folder to load css, js and images
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 # configures folder for storing images
 MEDIA_URL = '/media/'

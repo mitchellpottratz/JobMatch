@@ -37,3 +37,20 @@ def new(request):
 		form = JobPostForm()
 
 	return render(request, 'job_posts/new.html', {'form': form})
+
+
+
+@login_required
+@company_account_required
+def show_companies_job_post(request):
+	return render(request, 'job_posts/show_company_job_posts.html')
+
+
+
+
+
+
+
+
+
+
