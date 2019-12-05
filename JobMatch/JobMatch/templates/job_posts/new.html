@@ -13,6 +13,7 @@
 <style>
 	#skills-results-container {
 		display: none;
+		z-index: 2;
 		position: absolute;
 		max-height: 150px;
 		overflow-y: scroll;
@@ -30,6 +31,9 @@
 		opacity: 0.7;
 	}
 
+	#added-skills-container {
+		height: 25px;
+	}
 
 </style>
 
@@ -73,13 +77,19 @@
 
 					<div class="form-group">
 						<label>Search for skills</label>
-						<input type="text" class="form-control" id='skill-search' name="skill-search">
-						<div class="card" id="skills-results-container" style="z-index: 2;">
+						<div class="d-flex">
+							<input type="text" class="form-control mr-1" id='skill-search' name="skill-search">
+							<button class="btn btn-primary" id="add-skill-btn">Add</button>
+						</div>
+						<div class="card" id="skills-results-container">
 							<p class="text-muted text-center">Results</p>
 							<div id="skill-search-results">
-								
 							</div>
 						</div>
+					</div>
+
+					<div class="form-group" id="added-skills-container">
+					
 					</div>
 
 					<div class="form-group">
@@ -146,6 +156,15 @@
 		$('#skill-search-results').on('click', function(e) {
 			$('#skill-search').val($(e.target).text())
 			$skillSearchResultContainer.hide()
+		})
+
+		// listens for the add skill button to be clicked
+		$('#add-skill-btn').on('click', function(e) {
+			e.preventDefault()
+			const skillText = $('#skill-search').val()
+			$('#skill-search').val('')
+			const $skill = $('<span class="badge badge-primary mr-1 p-2">' + skillText + '</span>')
+			$('#added-skills-container').append($skill)
 		})
 
 	</script>
