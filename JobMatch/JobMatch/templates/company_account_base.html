@@ -1,9 +1,9 @@
-<!-- loads static assets from the /static folder configured in django -->
 <!DOCTYPE html>
 <html>
 <head>
 	{% block title %}{% endblock %}
 
+	<!-- loads static assets from the /static folder configured in django -->
 	{% load static %}
 
 	<!-- bootstrap css -->
@@ -22,7 +22,7 @@
 		{% block body %}
 		{% endblock %}
 		<nav class="nav nav-pills nav-fill account-navigation">
-			<a href="/company-account/index" class="nav-item nav-link" id="account-link">Account</a>
+			<a href="/company-account/" class="nav-item nav-link" id="account-link">Account</a>
 			<a href="/job-posts/" class="nav-item nav-link" id="job-posts-link">Job Posts</a>
 			<a href="/job-posts/new" class="nav-item nav-link" id="new-job-post-link">New Job Post</a>
 			<a href="#" class="nav-item nav-link" id="notifications-link">Notifications</a>

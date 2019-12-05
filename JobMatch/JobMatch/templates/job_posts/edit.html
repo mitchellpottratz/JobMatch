@@ -1,0 +1,91 @@
+{% extends 'company_account_base.html' %}
+
+{% block title %}<title>Company User Dashboard</title>{% endblock %}
+
+{% block head %}
+
+{% load static %}
+
+<!-- this links the tinymce javascript for the tinymce text editor -->
+{{ form.media }}
+
+<!-- google places autocomplete -->
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places&key=AIzaSyD2SrQatxg5NRBSxInBE_vI7FfUp8DoGUA"></script>
+
+{% endblock %}
+
+{% block body %}
+	<div class="row mb-4 py-4">
+		<div class="col-2"></div>
+		<div class="col-8">
+			<div class="card card-body mb-4">
+				<h5 class="card-title">New Job Post</h5>
+				<form method="POST">
+					{% csrf_token %}
+					<div class="form-group">
+						<label>Job Title</label>
+						{{ form.job_title }}
+					</div>
+
+					<div class="form-group">
+						<div class="row">
+							<div class="col">
+								<label>Industry</label>
+								{{ form.industry }}
+							</div>
+							<div class="col">
+								<label>Employment Type</label>
+								{{ form.employment_type }}
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label>Description</label>
+						{{ form.description }}
+					</div>
+
+					<div class="form-group">
+						<label>Location</label>
+						{{ form.location }}
+					</div>
+
+					<div class="form-group">
+						<label>Search for skills</label>
+						<div class="d-flex">
+							<input type="text" class="form-control mr-1" id='skill-search' name="skill-search">
+							<button class="btn btn-primary" id="add-skill-btn">Add</button>
+						</div>
+						<div class="card" id="skills-results-container">
+							<p class="text-muted text-center">Results</p>
+							<div id="skill-search-results">
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group" id="added-skills-container">
+					
+					</div>
+
+					<div class="form-group">
+						<div class="form-check py-1">
+			    			{{ form.active }}
+			    			<label class="form-check-label">Would you like to post this job right after creating it?</label>
+				    	</div>
+					</div>
+
+					{{form.skills}}
+
+					<input type="submit" id="btn" class="btn btn-primary" value="Create">
+
+				</form>
+			</div>
+		</div>
+		<div class="col-2"></div>
+	</div>
+	<!-- script for google location autocomplete for the location form field -->
+	<script type="text/javascript" src="{% static 'js/googleLocationAutocomplete.js' %}"></script>
+
+	<!-- script for adding skills to the job post -->
+	<script type="text/javascript" src="{% static 'js/skills.js' %}"></script>
+{% endblock %}

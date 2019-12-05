@@ -1,6 +1,6 @@
 
 switch (window.location.pathname) {
-	case '/company-account/index/':
+	case '/company-account/':
 		$('#account-link').addClass('active')
 		break
 	case '/job-posts/':

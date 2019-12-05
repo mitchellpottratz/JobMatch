@@ -5,17 +5,38 @@
 {% block head %}
 <style type="text/css">
 	#job-posts-card {
-		min-height: 100vh;
+		/*min-height: 100vh;*/
 	}
 </style>
 {% endblock %}
 
 {% block body %}
 
-<div class="card card-body" id="job-posts-card">
-	<h3>Job Posts</h3>
-	
+<div class="card card-body mb-4" id="job-posts-card">
+	<h4>Job Posts</h4>
 </div>
+	
+
+	{% for post in job_posts %}
+	<div class="card d-flex justify-content-between mt-1">
+	
+		<div class="card-body d-flex justify-content-between">
+			<div>
+				<h5>{{ post.job_title }}</h5>
+				<p class="text-muted mb-0">{{ post.location }}</p>
+				<p class="text-muted">{{ post.timestamp }}</p>
+			</div>
+			<div>
+				<a href="#" class="btn btn-sm btn-primary d-block">Find Matches</a>
+				<a href="#" class="btn btn-sm btn-primary d-block mt-1">View Matches</a>
+				<a href="/job-posts/edit/{{ post.id }}/" class="btn btn-sm btn-secondary d-block mt-1">Edit</a>
+			</div>
+		</div>
+		
+	</div>
+	{% endfor %}
+
+
 
 {% endblock %}
 

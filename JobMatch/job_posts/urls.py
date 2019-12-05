@@ -3,13 +3,15 @@ from . import views
 
 urlpatterns = [
 
-	# where company users can see all of their active
+	# where company users can see all their companies
 	# job posts
-	path('', views.index, name='index'),
+	path('', views.all_job_posts, name='index'),
 
 	# where company users create job posts
-	path('new/', views.new, name='new'),	
+	path('new/', views.new_job_post, name='new'),	
 
+	# where company users can edit a job post 
+	path('edit/<id>/', views.update_job_post, name='update_job_post'),
 ]
 
 
