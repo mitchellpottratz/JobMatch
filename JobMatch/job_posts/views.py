@@ -19,15 +19,18 @@ def new(request):
 	if request.method == 'POST':
 
 		form = JobPostForm(request.POST)
-		print(request.POST)
+		print('job post form data:', request.POST)
 
 		# if the form is valid
 		if form.is_valid():
-			pass
+			job_post = form.save(commit=False)
+			job_post.user = request.user
+			job_post.company_account = request.user.company_account
+			job_post.save()
 
 		# if the form wasnt valid
 		else:
-			pass
+			print('form validation error')
 
 	# if the form wasnt submitted
 	else:

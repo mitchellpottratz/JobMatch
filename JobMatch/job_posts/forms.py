@@ -37,6 +37,7 @@ class JobPostForm(forms.ModelForm):
 			'class': 'form-check-input'
 		})
 
+		# add a unique id to the skills field
 		self.fields['skills'].widget.attrs.update({
 			'id': 'skills-hidden-input'
 		})
