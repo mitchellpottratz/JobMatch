@@ -29,6 +29,8 @@
 		cursor: pointer;
 		opacity: 0.7;
 	}
+
+
 </style>
 
 {% endblock %}
@@ -87,7 +89,7 @@
 				    	</div>
 					</div>
 
-					<input type="submit" class="btn btn-primary" value="Create">
+					<input type="submit" id="btn" class="btn btn-primary" value="Create">
 
 				</form>
 			</div>
@@ -125,7 +127,7 @@
 		        	if (data.results.length > 0) {
 			        	// iterate through all of the results
 			        	data.results.forEach((result) => {
-				        	const $skill = $('<div></div>').addClass('skill-result')
+				        	const $skill = $('<div class="skill-result"></div>')
 				        	const $skillText = $('<p>' + result + '</p>')
 				        	$skillText.text(result)
 				        	$skill.append($skillText)
@@ -135,10 +137,15 @@
 			        // if there are no results
 			        } else {
 			        	$skillSearchResults.append($('<p class="text-center">No Results</p>'))
-			        }
-		        	
+			        }		        	
 		        }
       		})	
+		})
+
+		// listens for a skill result to be clicked
+		$('#skill-search-results').on('click', function(e) {
+			$('#skill-search').val($(e.target).text())
+			$skillSearchResultContainer.hide()
 		})
 
 	</script>
