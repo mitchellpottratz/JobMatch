@@ -35,6 +35,10 @@
 		height: 25px;
 	}
 
+	#skills-hidden-input {
+		display: none;
+	}
+
 </style>
 
 {% endblock %}
@@ -46,7 +50,7 @@
 			<div class="card card-body mb-4">
 				<h5 class="card-title">New Job Post</h5>
 				<form method="POST">
-
+					{% csrf_token %}
 					<div class="form-group">
 						<label>Job Title</label>
 						{{ form.job_title }}
@@ -98,6 +102,8 @@
 			    			<label class="form-check-label">Would you like to post this job right after creating it?</label>
 				    	</div>
 					</div>
+
+					{{form.skills}}
 
 					<input type="submit" id="btn" class="btn btn-primary" value="Create">
 
@@ -159,12 +165,20 @@
 		})
 
 		// listens for the add skill button to be clicked
-		$('#add-skill-btn').on('click', function(e) {
+		$('#add-skill-btn').on('click', (e) => {
 			e.preventDefault()
 			const skillText = $('#skill-search').val()
 			$('#skill-search').val('')
 			const $skill = $('<span class="badge badge-primary mr-1 p-2">' + skillText + '</span>')
 			$('#added-skills-container').append($skill)
+
+			const $selectedSkill = $('#skills-hidden-input option').filter(function(i, e) { 
+				console.log($(e).text(), '-', skillText)
+				return $(e).text() === skillText
+			})
+			console.log($selectedSkill)
+			console.log($selectedSkill.text())
+			$selectedSkill.prop('selected', true)
 		})
 
 	</script>

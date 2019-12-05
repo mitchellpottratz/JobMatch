@@ -19,6 +19,7 @@ def new(request):
 	if request.method == 'POST':
 
 		form = JobPostForm(request.POST)
+		print(request.POST)
 
 		# if the form is valid
 		if form.is_valid():
