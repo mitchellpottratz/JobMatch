@@ -22,6 +22,17 @@ class JobPostForm(forms.ModelForm):
 				'class': 'form-control'
 			})
 
+		# add location-input id to the location field for google 
+		# location autocomplete api
+		self.fields['location'].widget.attrs.update({
+			'id': 'location-input'
+		})
+
+		# adds bootstrap class for styling a checkbox to active field
+		self.fields['active'].widget.attrs.update({
+			'class': 'form-check-input'
+		})
+
 
 
 
