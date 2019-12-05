@@ -31,6 +31,18 @@ def create(request):
 			)
 
 
+# searches through the skills
+def search(request):
+
+	# get the search string from the ajax call
+	skill = request.GET.get('skill_string')
+
+	print('skill:', skill)
+
+	return JsonResponse({'data': skill})
+
+
+
 
 
 
