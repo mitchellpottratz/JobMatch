@@ -4,6 +4,7 @@ from tinymce import models as tinymce_models
 from django.conf import settings
 from company_users.models import Company 
 from skills.models import Skill 
+from .managers import JobPostQuerySet
 
 
 # this model represents a job post 
@@ -38,6 +39,8 @@ class JobPost(models.Model):
 	last_updated = models.DateTimeField(default=timezone.now())
 
 	timestamp = models.DateTimeField(default=timezone.now())
+
+	objects = JobPostQuerySet.as_manager()
 
 	def __str__(self):
 		return self.company_account.name + ' - ' + self.job_title

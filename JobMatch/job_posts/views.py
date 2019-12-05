@@ -6,9 +6,16 @@ from django.contrib.auth.decorators import login_required
 from company_account.decorators import company_account_required
 
 # model imports 
+from .models import JobPost
 
 # form imports
 from .forms import JobPostForm
+
+
+@login_required
+@company_account_required
+def index(request):
+	return render(request, 'job_posts/index.html')
 
 # creates a job post
 @login_required
@@ -38,12 +45,6 @@ def new(request):
 
 	return render(request, 'job_posts/new.html', {'form': form})
 
-
-
-@login_required
-@company_account_required
-def show_companies_job_post(request):
-	return render(request, 'job_posts/show_company_job_posts.html')
 
 
 
