@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'candidate_account.apps.CandidateAccountConfig',
     'job_posts.apps.JobPostsConfig',
     'skills.apps.SkillsConfig',
+    'projects.apps.ProjectsConfig',
 
     # installed packages
     'location_field.apps.DefaultConfig',

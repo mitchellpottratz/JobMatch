@@ -30,6 +30,9 @@ urlpatterns = [
     # this app handles the logic for adding and finding skills
     path('skills/', include('skills.urls')),
 
+    # candidate users can CRUD their past projects
+    path('projects/', include('projects.urls')),
+
     # text editor package
     path('tinymce/', include('tinymce.urls')),
 
