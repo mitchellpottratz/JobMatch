@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.conf import settings
 from tinymce import models as tinymce_models 
+from .managers import ExperienceQuerySet
 
 
 # represents a candidate users experience
@@ -23,8 +24,11 @@ class Experience(models.Model):
 	last_updated = models.DateTimeField(default=timezone.now()) 
 	timestamp = models.DateTimeField(default=timezone.now()) 
 
+	# query manager
+	objects = ExperienceQuerySet.as_manager()
+
 	def __str__(self):
-		return self.user.get_full_name + ' - ' + self.title
+		return self.user.get_full_name() + ' - ' + self.title
 
 
 

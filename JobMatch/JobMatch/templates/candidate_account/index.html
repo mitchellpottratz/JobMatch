@@ -21,6 +21,7 @@
 
 		<div class="card mt-4">
 			<div class="card-body">
+				<h5 class="card-title">Projects</h5>
 				{% if projects %}
 
 					{% for project in projects %}
@@ -31,6 +32,21 @@
 					<p class="text-center text-muted">no project</p>
 				{% endif %}
 			</div>	
+		</div>
+
+		<div class="card mt-4">
+			<div class="card-body">
+				<h5 class="card-title">Experiences</h5>
+				{% if experiences %}
+
+				{% for experience in experiences %}
+					{{ experience }}
+				{% endfor %}
+
+				{% else %}
+					<p class="text-center text-muted">no experiences</p>
+				{% endif %}
+			</div>
 		</div>
 
 	</div>
