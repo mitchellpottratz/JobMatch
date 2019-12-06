@@ -3,6 +3,7 @@ from django.conf import settings
 from django.utils import timezone
 from location_field.models.plain import PlainLocationField
 from phone_field import PhoneField
+from skills.models import Skill
 
 
 # this model holds all of the users information such as;
@@ -22,7 +23,11 @@ class CandidateInfo(models.Model):
 	bio = models.TextField(max_length=500, blank=True, null=True)
 	phone_number = PhoneField(blank=True)
 
-	# *- ADD SKILLS FIELD WHEN THE SKILL MODEL IS CREATED -*
+	# the users skills
+	skills = models.ManyToManyField(Skill)
+
+	last_updated = models.DateTimeField(default=timezone.now())
+	timestamp = models.DateTimeField(default=timezone.now())
 
 
 
