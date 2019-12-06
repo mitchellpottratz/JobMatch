@@ -13,7 +13,7 @@ from .forms import ExperienceForm
 def new(request):
 	# if the form was submitted
 	if request.method == 'POST':
-		form = ExperienceForm(request.POSTd)
+		form = ExperienceForm(request.POST)
 
 		# if the form is valid 
 		if form.is_valid():
@@ -31,3 +31,9 @@ def new(request):
 	else:
 		form = ExperienceForm()
 	return render(request, 'experience/new.html', {'form': form})
+
+
+
+
+
+
