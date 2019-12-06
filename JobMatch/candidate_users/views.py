@@ -31,7 +31,7 @@ def complete_info(request):
 			candidate_info = form.save(commit=False)
 			candidate_info.user = request.user
 			candidate_info.save()
-			return redirect('/candidate/account/')
+			return redirect('/candidate-account/')
 
 		# if the the form wasnt valid
 		else:

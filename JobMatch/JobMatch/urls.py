@@ -33,6 +33,9 @@ urlpatterns = [
     # candidate users can CRUD their past projects
     path('projects/', include('projects.urls')),
 
+    # candidate users can CRUD their past experience
+    path('experience/', include('experience.urls')),
+
     # text editor package
     path('tinymce/', include('tinymce.urls')),
 

@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'job_posts.apps.JobPostsConfig',
     'skills.apps.SkillsConfig',
     'projects.apps.ProjectsConfig',
+    'experience.apps.ExperienceConfig',
 
     # installed packages
     'location_field.apps.DefaultConfig',
