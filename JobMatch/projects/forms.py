@@ -34,7 +34,3 @@ class ProjectForm(forms.ModelForm):
 			self.fields[field].widget.attrs.update({
 				'class': 'form-control'
 			})
-
-		self.fields['start_date'].widget.attrs.update({
-			'type': 'date'
-		})
