@@ -1,10 +1,15 @@
 from django import forms
-from tinymce.widgets import TinyMCE
 from .models import Experience
+from tinymce.widgets import TinyMCE
+from job_posts.choices import EMPLOYMENT_TYPE_CHOICES
 
 
 # form for creating a new project
 class ExperienceForm(forms.ModelForm):
+	employment_type = forms.ChoiceField(choices=EMPLOYMENT_TYPE_CHOICES)
+	description = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 10}))
+
+
 	class Meta:
 		model = Experience
 		exclude = ['user', 'last_updated', 'timestamp']
@@ -22,5 +27,11 @@ class ExperienceForm(forms.ModelForm):
 			self.fields[field].widget.attrs.update({
 				'class': 'form-control'
 			})
+
+		# add location-input id to the location field for google 
+		# location autocomplete api
+		self.fields['location'].widget.attrs.update({
+			'id': 'location-input'
+		})
 
 

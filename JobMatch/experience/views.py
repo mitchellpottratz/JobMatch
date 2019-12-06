@@ -11,4 +11,23 @@ from .forms import ExperienceForm
 
 @login_required
 def new(request):
-	return render(request, 'experience/new.html')
+	# if the form was submitted
+	if request.method == 'POST':
+		form = ExperienceForm(request.POSTd)
+
+		# if the form is valid 
+		if form.is_valid():
+			experience = form.save(commit=False)
+			experience.user = request.user
+			experience.save()
+			return redirect('/candidate-account/')
+
+		# if the form is not valid
+		else:
+			print('form invalid')
+			print(form.errors)
+
+	# if the form hasnt been submitted
+	else:
+		form = ExperienceForm()
+	return render(request, 'experience/new.html', {'form': form})

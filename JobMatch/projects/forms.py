@@ -1,29 +1,19 @@
 from django import forms
-from tinymce.widgets import TinyMCE
 from .models import Project
+from tinymce.widgets import TinyMCE
 
 
 # form for creating a new project
 class ProjectForm(forms.ModelForm):
-
-	start_date = forms.DateField(
-		input_formats=['%Y-%m-%d'],
-		widget=forms.DateTimeInput(attrs={
-			'class': 'form-control datetimepicker-input',
-			'data-target': '#datetimepicker1'
-		})
-	)
-	end_date = forms.DateField(
-		input_formats=['%Y-%m-%d'],
-		widget=forms.DateTimeInput(attrs={
-			'class': 'form-control datetimepicker-input',
-			'data-target': '#datetimepicker1'
-		})
-	)
+	description = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 10}))
 
 	class Meta:
 		model = Project
 		exclude = ['user', 'last_updated', 'timestamp']
+		widgets = {
+			'start_date': forms.DateInput(attrs={'type': 'date'}),
+			'end_date': forms.DateInput(attrs={'type': 'date'}),
+		}
 
 
 	def __init__(self, *args, **kwargs):
