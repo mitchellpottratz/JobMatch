@@ -33,6 +33,40 @@ def new(request):
 	return render(request, 'experience/new.html', {'form': form})
 
 
+@login_required
+def edit(request, id):
+	# gets the current user
+	user = request.user
+
+	# get the experience to be edited by its id
+	experience = Experience.objects.get(id=id)
+
+	# if the current user is not the owner of the experience
+	if experience.user != user:
+		raise PermissionDenied
+
+	# if the form was submitted
+	if request.method == 'POST':
+		form = ExperienceForm(request.POST, instance=experience)
+
+		# if the form is valid 
+		if form.is_valid():
+			experience = form.save(commit=False)
+			experience.user = request.user
+			experience.save()
+			return redirect('/candidate-account/')
+
+		# if the form is not valid
+		else:
+			print('form invalid')
+			print(form.errors)
+
+	# if the form hasnt been submitted
+	else:
+		form = ExperienceForm(instance=experience)
+	return render(request, 'experience/edit.html', {'form': form})
+
+
 
 
 
