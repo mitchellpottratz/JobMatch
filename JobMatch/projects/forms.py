@@ -6,15 +6,15 @@ from .models import Project
 # form for creating a new project
 class ProjectForm(forms.ModelForm):
 
-	start_date = forms.DateTimeField(
-		input_formats=['%d/%m/%Y'],
+	start_date = forms.DateField(
+		input_formats=['%Y-%m-%d'],
 		widget=forms.DateTimeInput(attrs={
 			'class': 'form-control datetimepicker-input',
 			'data-target': '#datetimepicker1'
 		})
 	)
-	end_date = forms.DateTimeField(
-		input_formats=['%d/%m/%Y'],
+	end_date = forms.DateField(
+		input_formats=['%Y-%m-%d'],
 		widget=forms.DateTimeInput(attrs={
 			'class': 'form-control datetimepicker-input',
 			'data-target': '#datetimepicker1'

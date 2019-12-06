@@ -30,4 +30,8 @@ class Project(models.Model):
 	 def __str__():
 	 	return self.user.full_name() + ' - ' + self.name
 
+	 # formats the dates for start_date and end_date
+	 def format_dates(self):
+	 	pass
+
 
