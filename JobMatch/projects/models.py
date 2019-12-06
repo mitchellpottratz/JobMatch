@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.conf import settings
 from tinymce import models as tinymce_models 
+from .managers import ProjectQuerySet
 
 
 # represents a candidate users project
@@ -27,11 +28,10 @@ class Project(models.Model):
 	 last_updated = models.DateTimeField(default=timezone.now()) 
 	 timestamp = models.DateTimeField(default=timezone.now()) 
 
-	 def __str__():
-	 	return self.user.full_name() + ' - ' + self.name
+	 # query manager
+	 objects = ProjectQuerySet.as_manager()
 
-	 # formats the dates for start_date and end_date
-	 def format_dates(self):
-	 	pass
+	 def __str__(self):
+	 	return self.user.get_full_name() + ' - ' + self.title
 
 
