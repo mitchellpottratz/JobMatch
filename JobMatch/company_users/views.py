@@ -72,7 +72,7 @@ def create_company(request):
 			company.admin = request.user # the user that created th company becomes the admin
 			company.invite_code = generate_invite_code() # generates random invite code string
 			company.save()
-			return redirect('/company-account/index')
+			return redirect('/company-account/')
 
 	# if the https method is GET
 	else:
