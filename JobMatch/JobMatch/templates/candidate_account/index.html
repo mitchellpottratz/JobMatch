@@ -2,10 +2,14 @@
 
 {% block title %}<title>Candidate User Dashboard</title>{% endblock %}
 
-{% block head %}{% endblock %}
+{% block head %}
+
+{% load static %}
+
+{% endblock %}
 
 {% block body %}
-	<div class="py-4">
+	<div class=" card-margin">
 		<div class="card" class="account-header">
 			<div class="card-body">
 		    	<div class="d-flex">
@@ -49,7 +53,27 @@
 			</div>
 		</div>
 
+		<div class="card mt-4">
+			<div class="card-body">
+				<h5>Skills</h5>
+				{% if user.skills.count > 0 %}
+
+				{% else %}
+					<p class="text-center text-muted">You do not have any skills added</p>
+				{% endif %}
+				<a href="/skills/add/">Add Skills</a>
+			</div>
+		</div>
+
 	</div>
+
 {% endblock %}
+
+
+
+
+
+
+
 
 

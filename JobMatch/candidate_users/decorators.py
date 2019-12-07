@@ -11,7 +11,7 @@ def no_candidate_info(function):
 	@wraps(function)
 	def wrap(request, *args, **kwargs):
 		if CandidateInfo.objects.filter(user=request.user):
-			return HttpResponseRedirect('/candidate/')
+			return HttpResponseRedirect('/candidate-account/')
 		else:
 			return function(request, *args, **kwargs)
 	return wrap
