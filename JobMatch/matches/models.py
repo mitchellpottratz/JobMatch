@@ -35,7 +35,7 @@ class Match(models.Model):
 	timestamp = models.DateTimeField(default=timezone.now())
 
 	def __str__(self):
-		return self.candidate_user.get_full_name() + ' - ' + self.job_post.job_title
+		return self.candidate_user.get_full_name()
 
 
 
