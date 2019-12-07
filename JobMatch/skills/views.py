@@ -6,33 +6,39 @@ from django.contrib.auth.decorators import login_required
 
 # model imports 
 from .models import Skill
+from candidate_users.models import CandidateInfo
 
 # creates a new skill
-def create(request):
+@login_required
+def add(request):
 
 	# POST is the only method allowed for this view 
 	if request.method == 'POST':
 
 		# gets the name of the skill
-		name = request.POST.get('name')
+		name = request.POST.get('skill-name')
 
 		# if the skills doesnt already exist
-		if not Skill.objects.filter(name__iexact=name):
+		if not Skill.objects.filter(name=name):
 
 			# creates a new skill
 			skill = Skill.objects.create(name=name)
 
-			return JsonResponse(
-				{'message': 'Skill added'}
-			)
-
+		# if skill already exists
 		else:
-			return JsonResponse(
-				{'message': 'That skill already exists'}
-			)
+			# gets the skill by its naem
+			skill = Skill.objects.get(name=name)
+
+		# adds the skill to the candidate users skills field
+		candidate_info = CandidateInfo.objects.get(user=request.user)
+		candidate_info.skills.add(skill)
+		candidate_info.save()
+
+	return render(request, 'skills/new.html')
 
 
 # searches through the skills
+@login_required
 def search(request):
 
 	# get the search string from the ajax call
@@ -45,6 +51,8 @@ def search(request):
 	results_list = [model_to_dict(result)['name'] for result in results]
 
 	return JsonResponse({'results': results_list})
+
+
 
 
 

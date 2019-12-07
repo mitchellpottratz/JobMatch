@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% block title %}{% endblock %}
+
+	<!-- loads static assets from the /static folder configured in django -->
+	{% load static %}
+
+	<!-- bootstrap css -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+	<!-- jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+	<!-- custom stylesheet -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+	{% block head %}{% endblock %}
+</head>
+<body>
+	<div class="container">
+		{% block body %}
+		{% endblock %}
+		<nav class="nav nav-pills nav-fill account-navigation">
+			<a href="/candidate-account/" class="nav-item nav-link" id="account-link">Account</a>
+			<a href="/matches/find" class="nav-item nav-link" id="job-posts-link">Find Matches</a>
+			<a href="/matches/candidate" class="nav-item nav-link" id="new-job-post-link">Matches</a>
+			<a href="#" class="nav-item nav-link" id="notifications-link">Notifications</a>
+		</nav>
+	</div>
+	<!-- <script type="text/javascript" src="{% static 'js/companyAccountNavigation.js' %}"></script> -->
+</body>
+</html>

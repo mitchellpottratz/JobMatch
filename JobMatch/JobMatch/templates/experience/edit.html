@@ -1,0 +1,75 @@
+{% extends 'candidate_account_base.html' %}
+
+{% block title %}<title>Create an Experience</title>{% endblock %}
+
+{% block head %}
+
+{% load static %}
+
+<!-- this links the tinymce javascript for the tinymce text editor -->
+{{ form.media }}
+
+<!-- google places autocomplete -->
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places&key=AIzaSyD2SrQatxg5NRBSxInBE_vI7FfUp8DoGUA"></script>
+
+{% endblock %}
+
+{% block body %}
+    <div class="row py-4">
+      <div class="col-2"></div>
+      <div class="col-8">
+        <div class="card card-body card-margin">
+          <h5 class="card-title">New Experience</h5>
+          <form method="POST">
+            {% csrf_token %}
+
+            <div class="form-group">
+              <label>Title</label>
+              {{ form.title }}
+            </div>
+
+            <div class="form-group">
+              <label>Company</label>
+              {{ form.company }}
+            </div>
+
+            <div class="form-group">
+              <label>Employment Type</label>
+              {{ form.employment_type }}
+            </div>
+
+            <div class="form-group">
+              <label>Location</label>
+              {{ form.location }}
+            </div>
+
+            <div class="form-group">
+              <label>Start Date</label>
+              {{ form.start_date }}                
+            </div>
+
+            <div class="form-group">
+              <label>End Date</label>
+              {{ form.end_date }}
+            </div>
+
+            <div class="form-group">
+              <label>Description</label>
+              {{ form.description }}
+            </div>
+            
+            <input type="submit" class="btn btn-primary" value="Create Experience">
+          </form>
+        </div>
+      </div>
+      <div class="col-2"></div>
+    </div>
+
+    <!-- script for google location autocomplete for the location form field -->
+    <script type="text/javascript" src="{% static 'js/googleLocationAutocomplete.js' %}"></script>
+{% endblock %}
+
+
+
+
+

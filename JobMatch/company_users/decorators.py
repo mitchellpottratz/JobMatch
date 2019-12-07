@@ -8,7 +8,7 @@ def no_company(function):
 	def wrap(request, *args, **kwargs):
 		user = request.user
 		if user.company_account:
-			return HttpResponseRedirect('/company-account/index')
+			return HttpResponseRedirect('/company-account/')
 		else:
 			return function(request, *args, **kwargs)
 	return wrap

@@ -1,0 +1,84 @@
+{% extends 'candidate_account_base.html' %}
+
+{% block title %}<title>Candidate User Dashboard</title>{% endblock %}
+
+{% block head %}
+
+{% load static %}
+
+{% endblock %}
+
+{% block body %}
+	<div class=" card-margin">
+		<div class="card" class="account-header">
+			<div class="card-body">
+		    	<div class="d-flex">
+		    		<img src="/media/users/default_profile_picture.png" class="img-fluid" alt="profile picture">	
+		    		<div class="px-4">
+		    			<h3>{{ user.get_full_name }}</h3>
+		    			<h6 class="text-muted">{{ user.format_username }}</h6>
+		    			<h6 class="text-muted">{{ user.email }}</h6>
+		    		</div>
+		    	</div>
+		  	</div>
+		</div>
+
+		<div class="card mt-4">
+			<div class="card-body">
+				<h5 class="card-title">Projects</h5>
+				{% if projects %}
+
+					{% for project in projects %}
+						{{project}}
+					{% endfor %}
+
+				{% else %}
+					<p class="text-center text-muted">no project</p>
+				{% endif %}
+			</div>	
+		</div>
+
+		<div class="card mt-4">
+			<div class="card-body">
+				<h5 class="card-title">Experiences</h5>
+				{% if experiences %}
+
+				{% for experience in experiences %}
+					{{ experience }}
+				{% endfor %}
+
+				{% else %}
+					<p class="text-center text-muted">no experiences</p>
+				{% endif %}
+			</div>
+		</div>
+
+		<div class="card mt-4">
+			<div class="card-body">
+				<h5>Skills</h5>
+				
+				{% if skills.count > 0 %}
+
+				{% for skill in skills %}
+					{{ skill }}
+				{% endfor %}				
+
+				{% else %}
+					<p class="text-center text-muted">You do not have any skills added</p>
+				{% endif %}
+				<a href="/skills/add/">Add Skills</a>
+			</div>
+		</div>
+
+	</div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+

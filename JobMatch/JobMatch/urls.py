@@ -21,10 +21,20 @@ urlpatterns = [
     # company users main dashboard
     path('company-account/', include('company_account.urls')),
 
+    # candidate users main dashboard
+    path('candidate-account/', include('candidate_account.urls')),
+
+    # CRUD for job posts
     path('job-posts/', include('job_posts.urls')),
 
     # this app handles the logic for adding and finding skills
     path('skills/', include('skills.urls')),
+
+    # candidate users can CRUD their past projects
+    path('projects/', include('projects.urls')),
+
+    # candidate users can CRUD their past experience
+    path('experience/', include('experience.urls')),
 
     # text editor package
     path('tinymce/', include('tinymce.urls')),
