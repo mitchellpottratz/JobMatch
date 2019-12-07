@@ -38,6 +38,7 @@ def add(request):
 
 
 # searches through the skills
+@login_required
 def search(request):
 
 	# get the search string from the ajax call
