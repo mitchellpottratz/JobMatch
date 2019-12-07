@@ -36,9 +36,11 @@ urlpatterns = [
     # candidate users can CRUD their past experience
     path('experience/', include('experience.urls')),
 
+    # this app handles the logic for job post matches
+    path('matches/', include('matches.urls')),
+
     # text editor package
     path('tinymce/', include('tinymce.urls')),
-
 ] 
 
 # configures path for static files

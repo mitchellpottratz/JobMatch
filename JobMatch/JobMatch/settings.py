@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'skills.apps.SkillsConfig',
     'projects.apps.ProjectsConfig',
     'experience.apps.ExperienceConfig',
+    'matches.apps.MatchesConfig',
 
     # installed packages
     'location_field.apps.DefaultConfig',
