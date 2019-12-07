@@ -40,7 +40,7 @@ def new_job_post(request):
 			job_post.user = request.user
 			job_post.company_account = request.user.company_account
 			job_post.save()
-			return redirect('/job-posts/')
+			return redirect('/matches/create/' + job_post.id + '/')
 
 		# if the form wasnt valid
 		else:

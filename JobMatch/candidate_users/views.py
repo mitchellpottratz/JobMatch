@@ -36,6 +36,7 @@ def complete_info(request):
 		# if the the form wasnt valid
 		else:
 			print('form is invalid')
+			print(form.errors)
 
 	# if the form has not been submitted yet
 	else:
