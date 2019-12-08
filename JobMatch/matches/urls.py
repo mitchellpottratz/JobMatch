@@ -3,7 +3,10 @@ from . import views
 
 urlpatterns = [
 	# here is where company users can see matches for one of their job posts
-	path('<id>/', views.find_job_posts_matches, name='find_job_posts_matches'),
+	path('<id>/', views.find_candidate_matches, name='find_candidate_matches'),
+
+	# here is where candidate users can see job post matches
+	path('', views.find_job_post_matches, name='find_job_post_matches'),
 	
 	# here matches are created for a job posts
 	path('create/<id>/', views.create_matches, name='create_matches'),

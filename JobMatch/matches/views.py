@@ -1,7 +1,7 @@
 # django imports
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from django.forms.models import model_to_dict
+from django.core.exceptions import ObjectDoesNotExist
 
 # import decorator that checks if current user is a company user
 from company_account.decorators import company_account_required
@@ -16,20 +16,30 @@ from candidate_users.models import CandidateInfo
 # for a job post
 @login_required
 @company_account_required
-def find_job_posts_matches(request, id):
+def find_candidate_matches(request, id):
 	# gets the job post
 	job_post = get_object_or_404(JobPost, id=id)
 
-	# gets all matches for the job post
-	match = Match.objects.get_job_post_match(job_post)
-	print(match)
+	try:
+		# gets all matches for the job post
+		match = Match.objects.get_job_post_match(job_post)
 
-	# gets the candidate user 
-	candidate_user = match.candidate_user
-	print(candidate_user.username)
+	# throws exception if there arent any matches left to view
+	except Match.DoesNotExist:
+		match = None
 
-	# gets the candidates user info 
-	candidate_user_info = CandidateInfo.objects.get(user=candidate_user)
+	# if there are still matches for the job post to view
+	if match is not None:
+		# gets the candidate user 
+		candidate_user = match.candidate_user
+
+		# gets the candidates user info 
+		candidate_user_info = CandidateInfo.objects.get(user=candidate_user)
+
+	# if there are not anymore matches to see for the job post
+	else:
+		candidate_user = None
+		candidate_user_info = None
 
 	# data being passed into the template
 	context = {
@@ -38,7 +48,7 @@ def find_job_posts_matches(request, id):
 		'candidate_user': candidate_user,
 		'candidate_user_info': candidate_user_info
 	}
-	return render(request, 'matches/find_job_posts_matches.html', context)
+	return render(request, 'matches/find_candidate_matches.html', context)
 
 
 # this view is where matches are automatically generated right after a 
@@ -82,6 +92,7 @@ def create_matches(request, id):
 	return redirect('/company-account/')	
 
 
+# this view is where a candidate is liked by a company
 @login_required
 @company_account_required
 def like_candidate(request, id):
@@ -98,11 +109,21 @@ def like_candidate(request, id):
 	return redirect('/matches/' + str(match.job_post.id))
 
 
-
+# this view is where a candidate is disliked by a company
 @login_required
 @company_account_required
 def dislike_candidate(request, id):
-	pass
+	# gets the match
+	match = get_object_or_404(Match, id=id)
+
+	# change it so the company dislikes the candidate user and set
+	# the value of the current company user
+	match.company_liked	= False 
+	match.company_user_liked = request.user
+	match.save()
+
+	# goes back to find matches page
+	return redirect('/matches/' + str(match.job_post.id))
 
 
 
