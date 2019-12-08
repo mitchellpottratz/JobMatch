@@ -21,15 +21,24 @@ def find_job_posts_matches(request, id):
 	job_post = get_object_or_404(JobPost, id=id)
 
 	# gets all matches for the job post
-	matches = Match.objects.get_job_post_matches(job_post)
-	print(matches)
+	match = Match.objects.get_job_post_match(job_post)
+	print(match)
+
+	# gets the candidate user 
+	candidate_user = match.candidate_user
+	print(candidate_user.username)
+
+	# gets the candidates user info 
+	candidate_user_info = CandidateInfo.objects.get(user=candidate_user)
 
 	# data being passed into the template
 	context = {
 		'job_post': job_post,
-		'matches': matches
+		'match': match,
+		'candidate_user': candidate_user,
+		'candidate_user_info': candidate_user_info
 	}
-	return render(request, 'matches/find_job_posts_matches.html')
+	return render(request, 'matches/find_job_posts_matches.html', context)
 
 
 # this view is where matches are automatically generated right after a 
@@ -71,6 +80,29 @@ def create_matches(request, id):
 			match.save()
 		
 	return redirect('/company-account/')	
+
+
+@login_required
+@company_account_required
+def like_candidate(request, id):
+	# gets the match
+	match = get_object_or_404(Match, id=id)
+
+	# change it so the company likes the candidate user and set
+	# the value of the current company user
+	match.company_liked	= True 
+	match.company_user_liked = request.user
+	match.save()
+
+	# goes back to find matches page
+	return redirect('/matches/' + str(match.job_post.id))
+
+
+
+@login_required
+@company_account_required
+def dislike_candidate(request, id):
+	pass
 
 
 
