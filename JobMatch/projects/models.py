@@ -8,7 +8,7 @@ from .managers import ProjectQuerySet
 # represents a candidate users project
 class Project(models.Model):
 	 # user the project belongs to 
-	 user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+	 user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='projects')
 
 	 # basic info about the project
 	 title = models.CharField(max_length=150)

@@ -45,6 +45,7 @@ def show_candidate_match(request, id):
 	else:
 		candidate_user = None
 		candidate_user_info = None
+		experiences = None
 
 	# data being passed into the template
 	context = {
