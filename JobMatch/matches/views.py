@@ -90,16 +90,21 @@ def show_job_post_match(request):
 		# gets the company the job belongs to 
 		company = Company.objects.get(id=job_post.company_account.id)
 
+		# gets the skills for the job post
+		skills = job_post.skills.all()
+
 	# if the candidate user does not have anymore job post matches to view
 	else:
 		job_post = None
 		company = None
+		skills = None
 
 	# data being passed to the template
 	context = {
 		'match': match,
 		'job_post': job_post,
-		'company': company
+		'company': company,
+		'skills': skills
 	}
 	return render(request, 'matches/show_job_post_match.html', context)
 

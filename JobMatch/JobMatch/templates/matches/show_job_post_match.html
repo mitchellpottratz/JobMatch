@@ -1,25 +1,67 @@
 {% extends 'candidate_account_base.html' %}
 
-{% block title %}<title>Company User Dashboard</title>{% endblock %}
+{% block title %}<title>Find Matches</title>{% endblock %}
 
 {% block head %}
 
-
+<style type="text/css">
+	.company-img {
+		border: 1px solid lightgrey;
+		box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+	}
+</style>
 
 {% endblock %}
 
 {% block body %}
-	<div class="card">
+	<div class="card w-100 vh-100">
 		<div class="card-body">
-
-
 			{% if match is not None %}
-				{{ job_post.job_title }}
+			<div class="w-100 text-center overflow-auto h-75 p-3 border border-secondary rounded" id="view-candidate-container">
+				<h4>{{ job_post.job_title }}</h4>
+				<div class="mt-2 d-flex justify-content-center border-bottom border-secondary">
+					<p class="text-muted">
+						<i class="fas fa-map-marker-alt mr-1"></i>
+						{{ job_post.location }} - {{ job_post.company_account.name }}
+					</p>
+				</div>
 				
-				<a href="/matches/dislike-job/{{ match.id }}/" class="btn btn-danger">Dislike</a>
-				<a href="/matches/like-job/{{ match.id }}/" class="btn btn-success">Like</a>
+
+				<div class="row text-left mt-4 px-4">
+					<div class="col-8 border-right border-secondary">
+						<small class="text-muted">
+							{{ job_post.description | safe }}	
+						</small>
+					</div> 
+					<div class="col-4 px-4 text-muted">
+						<p>
+							<i class="far fa-building mr-1"></i>
+							{{ job_post.employment_type }}
+						</p>
+						<p>
+							<i class="fas fa-briefcase mr-1"></i>
+							{{ job_post.industry }}
+						</p>
+						<p class="pb-0 mb-0">Skills</p>
+						{% for skill in skills %}
+							<span class="badge badge-primary mr-3 mt-2 py-2 px-3 font-weight-normal">
+								{{ skill.name }}
+							</span><br>
+						{% endfor %}
+					</div>
+				</div>
+
+			</div>
+			<div class="w-100 d-flex justify-content-center mt-2 like-dislike-btn-container">
+				<a href="/matches/dislike-job/{{ match.id }}/" class="btn btn-lg btn-outline-danger w-25">
+					Dislike<i class="far fa-thumbs-down ml-2"></i>
+				</a>
+				<a href="/matches/like-job/{{ match.id }}/" class="btn btn-lg btn-outline-success w-25">
+					Like<i class="far fa-thumbs-up ml-2"></i>
+				</a>
+			</div>	
 			{% else %}
-				<p>no more matches to see</p>
+			<p>no more matches to see</p>
 			{% endif %}
 		</div>
 	</div>
