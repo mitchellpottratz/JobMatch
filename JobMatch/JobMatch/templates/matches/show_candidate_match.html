@@ -11,6 +11,10 @@
 		width: 100%;
 	}
 
+	.like-dislike-btn-container > a {
+		font-size: 1.1rem;
+	}
+
 	@media only screen and (max-width: 993px) {
 		#experience-details-container {
 			display: block!important;
@@ -121,9 +125,15 @@
 						</div>
 
 					</div>
+				</div>
+				<div class="w-100 d-flex justify-content-center mt-2 like-dislike-btn-container">
+					<a href="/matches/dislike-candidate/{{ match.id }}/" class="btn btn-lg btn-outline-danger w-25">
+						Dislike<i class="far fa-thumbs-down ml-2"></i>
+					</a>
+					<a href="/matches/like-candidate/{{ match.id }}/" class="btn btn-lg btn-outline-success w-25">
+						Like<i class="far fa-thumbs-up ml-2"></i>
+					</a>
 				</div>					
-				<a href="/matches/dislike-candidate/{{ match.id }}/" class="btn btn-danger">Dislike</a>
-				<a href="/matches/like-candidate/{{ match.id }}/" class="btn btn-success">Like</a>
 			{% else %}
 
 				<p>no more matches to see</p>
