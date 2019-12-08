@@ -14,5 +14,12 @@ class MatchQuerySet(models.QuerySet):
 			company_liked=None, 
 		).first()
 
+	# filters matches by the current candidate user and returns one
+	def get_candidate_match(self, candidate_user):
+		return self.filter(
+			candidate_user=candidate_user,
+			candidate_liked=None
+		).first()
+
 
 

@@ -10,18 +10,19 @@ from company_account.decorators import company_account_required
 from .models import Match
 from job_posts.models import JobPost
 from candidate_users.models import CandidateInfo
+from company_users.models import Company
 
 
-# this view is where company users can look through candidates
-# for a job post
+# this view is where company users are shown one candidate for a job post
+# and they can either like or dislike that candidate
 @login_required
 @company_account_required
-def find_candidate_matches(request, id):
+def show_candidate_match(request, id):
 	# gets the job post
 	job_post = get_object_or_404(JobPost, id=id)
 
 	try:
-		# gets all matches for the job post
+		# gets a match for the job post
 		match = Match.objects.get_job_post_match(job_post)
 
 	# throws exception if there arent any matches left to view
@@ -48,7 +49,44 @@ def find_candidate_matches(request, id):
 		'candidate_user': candidate_user,
 		'candidate_user_info': candidate_user_info
 	}
-	return render(request, 'matches/find_candidate_matches.html', context)
+	return render(request, 'matches/show_candidate_match.html', context)
+
+
+# this view is where candidates are shown one job post and they either
+# like or dislike the job post
+@login_required
+def show_job_post_match(request):
+	user = request.user
+
+	try:
+		# gets a match for the candidate
+		match = Match.objects.get_candidate_match(user)
+		print('match:', match)
+
+	# throws exception if there arent any matches left to view
+	except Match.DoesNotExist:
+		match = None
+
+	# if the candidate user still has matches to view
+	if match is not None:
+		# gets the job post 
+		job_post = match.job_post
+
+		# gets the company the job belongs to 
+		company = Company.objects.get(id=job_post.company_account.id)
+
+	# if the candidate user does not have anymore job post matches to view
+	else:
+		job_post = None
+		company = None
+
+	# data being passed to the template
+	context = {
+		'match': match,
+		'job_post': job_post,
+		'company': company
+	}
+	return render(request, 'matches/show_job_post_match.html', context)
 
 
 # this view is where matches are automatically generated right after a 
@@ -123,7 +161,48 @@ def dislike_candidate(request, id):
 	match.save()
 
 	# goes back to find matches page
-	return redirect('/matches/' + str(match.job_post.id))
+	return redirect('/matches/')
+
+
+# this view is where a job post is liked by a candidate
+@login_required
+def like_job(request, id):
+	# gets the match
+	match = get_object_or_404(Match, id=id)
+
+	# change the value of the candidate like field to true to 
+	# like the job
+	match.candidate_liked = True 
+	match.save()
+
+	# goes back to find matches page
+	return redirect('/matches/')
+
+
+# this view is where a job post is liked by a candidate@login_required
+@login_required
+def dislike_job(request, id):
+	# gets the match
+	match = get_object_or_404(Match, id=id)
+
+	# change the value of the candidate like field to false to 
+	# dislike the job
+	match.candidate_liked = False
+	match.save()
+
+	# goes back to find matches page
+	return redirect('/matches/')
+
+
+
+
+
+
+
+
+
+
+
 
 
 
