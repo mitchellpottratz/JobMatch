@@ -2,6 +2,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
+from django.utils import timezone
 
 # import decorator that checks if current user is a company user
 from company_account.decorators import company_account_required
@@ -61,7 +62,6 @@ def show_job_post_match(request):
 	try:
 		# gets a match for the candidate
 		match = Match.objects.get_candidate_match(user)
-		print('match:', match)
 
 	# throws exception if there arent any matches left to view
 	except Match.DoesNotExist:
@@ -141,11 +141,12 @@ def like_candidate(request, id):
 	# the value of the current company user
 	match.company_liked	= True 
 	match.company_user_liked = request.user
+	match.company_liked_timestamp = timezone.now()
 	match.save()
 
 	# if the candidate liked the job post
 	if match.candidate_liked == True:
-		return redirect('/matches/company/match/')
+		return redirect('/matches/company/match/' + str(match.id) + '/')
 
 	# if the candidate has not liked the job post
 	else:
@@ -163,6 +164,7 @@ def dislike_candidate(request, id):
 	# the value of the current company user
 	match.company_liked	= False 
 	match.company_user_liked = request.user
+	match.company_disliked_timestamp = timezone.now()
 	match.save()
 
 	# goes back to find matches page
@@ -178,11 +180,12 @@ def like_job(request, id):
 	# change the value of the candidate like field to true to 
 	# like the job
 	match.candidate_liked = True 
+	match.candidate_liked_timestamp = timezone.now()
 	match.save()
 
 	# if the company liked the candidate
 	if match.company_liked == True:
-		return redirect('/matches/candidate/match/')
+		return redirect('/matches/candidate/match/' + str(match.id) + '/')
 
 	# if the company has not liked the candidate
 	else:
@@ -198,10 +201,55 @@ def dislike_job(request, id):
 	# change the value of the candidate like field to false to 
 	# dislike the job
 	match.candidate_liked = False
+	match.candidate_liked_timestamp = timezone.now()
 	match.save()
 
 	# goes back to find matches page
 	return redirect('/matches/')
+
+
+# this view is where companies are notified when they have gotten a match
+@login_required
+@company_account_required
+def company_match(request, id):
+	# gets the match
+	match = get_object_or_404(Match, id=id)
+
+	# gets the candidate user 
+	candidate_user = match.candidate_user
+
+	# gets the candidates user info 
+	candidate_user_info = CandidateInfo.objects.get(user=candidate_user)
+
+	# data being passed to the template
+	context = {
+		'match': match,
+		'candidate_user': candidate_user,
+		'candidate_user_info': candidate_user_info
+	}
+	return render(request, 'matches/company_match.html', context)
+
+
+# this view is where candidates are notified when they have gotten a match
+@login_required
+def candidate_match(request, id):
+	# gets the match 
+	match = get_object_or_404(Match, id=id)
+
+	# gets the job post 
+	job_post = match.job_post
+
+	# gets the company the job belongs to 
+	company = Company.objects.get(id=job_post.company_account.id)
+
+	# data being passed to the template
+	context = {
+		'match': match,
+		'job_post': job_post,
+		'company': company
+	}
+	return render(request, 'matches/candidate_match.html', context)
+
 
 
 

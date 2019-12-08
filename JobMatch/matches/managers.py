@@ -21,5 +21,13 @@ class MatchQuerySet(models.QuerySet):
 			candidate_liked=None
 		).first()
 
+	# gets all of the matches for a job post we both company and candidate
+	# and candidate have liked eachother
+	def get_job_post_matches(self, job_post):
+		return self.filter(
+			job_post=job_post,
+			company_liked=True,
+			candidate_liked=True
+		).order_by('-company_liked_timestamp')
 
 

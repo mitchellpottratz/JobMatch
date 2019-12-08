@@ -22,5 +22,11 @@ urlpatterns = [
 
 	# here is where a candidate user dislikes a job post
 	path('dislike-job/<id>/', views.dislike_job, name='dislike_job'),
+
+	# here is where companies are notified when they get a match
+	path('company/match/<id>/', views.company_match, name='company_match'),
+
+	# here is where candidates are notified when they get a match
+	path('candidate/match/<id>/', views.candidate_match, name='candidate_match')
 ]
 

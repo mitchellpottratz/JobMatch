@@ -1,0 +1,25 @@
+{% extends 'company_account_base.html' %}
+
+{% block title %}<title>Company User Dashboard</title>{% endblock %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+
+<div class="card">
+	<div class="card-body">
+
+		{% for match in matches %}
+
+			{{ match.candidate_user }}
+
+		{% endfor %}
+		
+	</div>
+</div>
+
+
+
+{% endblock %}
