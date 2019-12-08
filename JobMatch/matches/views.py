@@ -1,5 +1,5 @@
 # django imports
-from django.shortcuts import render, redirect
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.forms.models import model_to_dict
 
@@ -17,7 +17,19 @@ from candidate_users.models import CandidateInfo
 @login_required
 @company_account_required
 def find_job_posts_matches(request, id):
-	return render(request, 'find_job_posts_matches.html')
+	# gets the job post
+	job_post = get_object_or_404(JobPost, id=id)
+
+	# gets all matches for the job post
+	matches = Match.objects.get_job_post_matches(job_post)
+	print(matches)
+
+	# data being passed into the template
+	context = {
+		'job_post': job_post,
+		'matches': matches
+	}
+	return render(request, 'matches/find_job_posts_matches.html')
 
 
 # this view is where matches are automatically generated right after a 
@@ -48,19 +60,16 @@ def create_matches(request, id):
 			if candidate not in candidates_list:
 				candidates_list.append(candidate)
 		
-	print('candidates list:', candidates_list)
-	print('job post:', job_post)
-	# iterate through the candidates and create a Match model for each candidate
+	# iterate through the candidates and create a Match model for each candidate if the 
+	# match doesnt already exist
 	for candidate in candidates_list:
-
-		# if not Match.objects.filter()
-		match = Match.objects.create(
-			candidate_user=candidate.user,
-		)
-		match.job_post = job_post
-		match.save()
-		print('match created:', match)
-
+		if not Match.objects.does_match_exist(candidate.user, job_post):
+			match = Match.objects.create(
+				candidate_user=candidate.user,
+				job_post=job_post
+			)
+			match.save()
+		
 	return redirect('/company-account/')	
 
 

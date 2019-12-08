@@ -43,7 +43,7 @@ class JobPost(models.Model):
 	objects = JobPostQuerySet.as_manager()
 
 	def __str__(self):
-		return self.company_account.name + ' - ' + self.job_title
+		return self.job_title
 
 
 
