@@ -2,6 +2,15 @@
 
 {% block title %}<title>Complete Account Information</title>{% endblock %}
 
+{% block head %}
+
+{% load static %}
+
+<!-- google places autocomplete -->
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places&key=AIzaSyD2SrQatxg5NRBSxInBE_vI7FfUp8DoGUA"></script>
+	
+{% endblock %}
+
 {% block body %}
 	<div class="row">
 		<div class="col-3"></div>
@@ -14,8 +23,8 @@
 						{% csrf_token %}
 						
 						<div class="form-group">
-							<label>City</label>
-							{{ form.city }}
+							<label>Location</label>
+							{{ form.location }}
 						</div>
 
 						<div class="form-group">
@@ -41,4 +50,7 @@
 
 		<div class="col-3"></div>
 	</div>
+
+	<!-- script for google location autocomplete for the location form field -->
+	<script type="text/javascript" src="{% static 'js/googleLocationAutocomplete.js' %}"></script>
 {% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'company_account_base.html' %}
+
+{% block title %}<title>{{ job_post.job_title }} Matches</title>{% endblock %}
+
+{% block head %}
+
+
+
+{% endblock %}
+
+{% block body %}
+	<div class="card">
+		<div class="card-body">
+			{% for match in matches %}
+				{{match.candidate_user}}
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

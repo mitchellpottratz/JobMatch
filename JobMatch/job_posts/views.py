@@ -1,5 +1,5 @@
 # django imports
-from django.shortcuts import render, redirect
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 
 # import decorator that checks if current user is a company user
@@ -7,6 +7,7 @@ from company_account.decorators import company_account_required
 
 # model imports 
 from .models import JobPost
+from matches.models import Match 
 
 # form imports
 from .forms import JobPostForm
@@ -40,7 +41,7 @@ def new_job_post(request):
 			job_post.user = request.user
 			job_post.company_account = request.user.company_account
 			job_post.save()
-			return redirect('/job-posts/')
+			return redirect('/matches/create/' + job_post.id + '/')
 
 		# if the form wasnt valid
 		else:
@@ -80,6 +81,24 @@ def update_job_post(request, id):
 
 	return render(request, 'job_posts/edit.html', {'form': form})
 
+
+# here is where companies can see all of the matches for a job post
+# where they liked the candidate and the candidate like them
+@login_required
+@company_account_required
+def show_matches(request, id):
+	# gets the job post 
+	job_post = get_object_or_404(JobPost, id=id)
+
+	# gets all of the matches for the job post
+	matches = Match.objects.get_job_post_matches(job_post)
+
+	# data being passed to the template
+	context = {
+		'job_post': job_post,
+		'matches': matches
+	}
+	return render(request, 'job_posts/show_matches.html', context)
 
 
 

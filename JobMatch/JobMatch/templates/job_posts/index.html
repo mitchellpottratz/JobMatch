@@ -27,8 +27,8 @@
 				<p class="text-muted">{{ post.timestamp }}</p>
 			</div>
 			<div>
-				<a href="#" class="btn btn-sm btn-primary d-block">Find Matches</a>
-				<a href="#" class="btn btn-sm btn-primary d-block mt-1">View Matches</a>
+				<a href="/matches/{{ post.id }}/" class="btn btn-sm btn-primary d-block">Find Matches</a>
+				<a href="/job-posts/{{ post.id }}/matches/" class="btn btn-sm btn-primary d-block mt-1">View Matches</a>
 				<a href="/job-posts/edit/{{ post.id }}/" class="btn btn-sm btn-secondary d-block mt-1">Edit</a>
 			</div>
 		</div>

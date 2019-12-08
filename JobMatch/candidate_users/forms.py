@@ -7,7 +7,7 @@ class CandidateInfoForm(ModelForm):
 
 	class Meta:
 		model = CandidateInfo
-		exclude = ['user']
+		exclude = ['user', 'skills', 'last_updated', 'timestamp']
 
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)	
@@ -17,6 +17,11 @@ class CandidateInfoForm(ModelForm):
 			self.fields[field].widget.attrs.update({
 				'class': 'form-control'
 			})
+
+		# add id to location field so it will use google location autocomplete
+		self.fields['location'].widget.attrs.update({
+			'id': 'location-input'
+		})
 
 
 

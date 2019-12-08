@@ -13,21 +13,23 @@ class CandidateInfo(models.Model):
 	# one to one relationship to a user
 	user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 	
-	# city and location store the users location
-	city = models.CharField(max_length=255, default='')
-	# location = PlainLocationField(based_fields=['city'], zoom=7, default='')
+	# where the users lives
+	location = models.CharField(max_length=250, blank=True, null=True)
 
 	resume = models.FileField(blank=True, upload_to='resumes/')
 
 	headline = models.CharField(max_length=75, blank=True, null=True)
 	bio = models.TextField(max_length=500, blank=True, null=True)
-	phone_number = PhoneField(blank=True)
+	phone_number = models.CharField(max_length=20, blank=True)
 
 	# the users skills
 	skills = models.ManyToManyField(Skill)
 
 	last_updated = models.DateTimeField(default=timezone.now())
 	timestamp = models.DateTimeField(default=timezone.now())
+
+	def __str__(self):
+		return self.user.get_full_name()
 
 
 
