@@ -41,6 +41,23 @@ class Match(models.Model):
 	def __str__(self):
 		return self.candidate_user.get_full_name()
 
+	# returns the name of the company
+	def get_company_name(self):
+		return self.job_post.company_account.name
+
+	# returns the companies image url
+	def get_company_image_url(self):
+		return self.job_post.company_account.image.url
+
+	# returns the job title the match was for
+	def get_job_title(self):
+		return self.job_post.job_title
+
+
+
+
+
+
 
 
 

@@ -11,7 +11,22 @@
 	<div class="card vh-100">
 		<div class="card-body">
 			<h5 class="uk-card-title">Matches</h5>
-			
+
+			<div class="list-group mt-4">
+				{% for match in matches %}
+				<a href="#" class="list-group-item list-group-item-action py-3">	
+					<div class="d-flex w-100 justify-content-between">
+						<div class="d-flex">
+							<img src="{{ match.get_company_image_url }}" width="35" height="35"
+							     class="rounded-circle border border-light mr-3" alt="user profile image">
+		      				<h5 class="mb-1">{{ match.get_company_name }} - {{ match.get_job_title }}</h5>
+						</div>
+	      				<small class="text-muted">{{ match.candidate_liked_timestamp }}</small>
+	    			</div>
+				</a>
+				{% endfor %}
+			</div>
+
 		</div>
 	</div>
 {% endblock %}

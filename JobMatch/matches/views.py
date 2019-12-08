@@ -274,8 +274,11 @@ def candidate_match(request, id):
 # this view is where candidates can view all of their matches
 @login_required
 def candidate_matches(request):
-	
-	return render(request, 'matches/candidate_matches.html')
+
+	# gets all of the candidates users matches 
+	matches = Match.objects.get_candidates_matches(request.user)
+
+	return render(request, 'matches/candidate_matches.html', {'matches': matches})
 
 
 
