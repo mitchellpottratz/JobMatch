@@ -27,6 +27,9 @@ urlpatterns = [
 	path('company/match/<id>/', views.company_match, name='company_match'),
 
 	# here is where candidates are notified when they get a match
-	path('candidate/match/<id>/', views.candidate_match, name='candidate_match')
+	path('candidate/match/<id>/', views.candidate_match, name='candidate_match'),
+
+	# here is where candidates can see all of their matches
+	path('candidate/all/', views.candidate_matches, name='candidate_matches'),
 ]
 

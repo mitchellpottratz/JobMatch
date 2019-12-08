@@ -271,6 +271,13 @@ def candidate_match(request, id):
 	return render(request, 'matches/candidate_match.html', context)
 
 
+# this view is where candidates can view all of their matches
+@login_required
+def candidate_matches(request):
+	
+	return render(request, 'matches/candidate_matches.html')
+
+
 
 
 

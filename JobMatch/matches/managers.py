@@ -1,6 +1,7 @@
 from django.db import models
 
 
+# this class manages the queries for the Match model
 class MatchQuerySet(models.QuerySet):
 
 	# checks if a match already exists for a candidate user and a job post
@@ -29,5 +30,15 @@ class MatchQuerySet(models.QuerySet):
 			company_liked=True,
 			candidate_liked=True
 		).order_by('-company_liked_timestamp')
+
+	# returns all of the matches for a candidate user
+	def get_candidates_matches(self, candidate_user):
+		return self.filter(
+			candidate_user=candidate_user,
+			company_liked=True,
+			candidate_liked=True
+		).order_by('-candidate_liked_timestamp')
+
+
 
 
