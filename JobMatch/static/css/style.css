@@ -66,6 +66,11 @@ embed {
 	width: 100%;
 }
 
+.company-img {
+	border: 1px solid lightgrey;
+	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+}
+
 .like-dislike-btn-container > a {
 	font-size: 1.1rem;
 }
@@ -88,6 +93,32 @@ embed {
 		height: auto!important;
 		margin-bottom: 20px;
 	}
+	#job-post-details-container > .col-right {
+			border: none!important;
+	}
+	#job-post-details-container > .col-left {
+		text-align: center;
+	}
+	#job-post-details-container > .col-left small {
+		margin-top: 0!important;
+		margin-bottom: 0!important;
+	}
+	#job-post-details-container > .col-left small:nth-child(2) {
+		display: inline!important;
+		margin-left: 10px;
+	}
+	#job-post-details-container > .col-left small:nth-child(3) {
+		margin-top: 10px!important;
+	}
+	#job-post-details-container > div {
+		margin-bottom: 20px;
+	}
+	.like-dislike-btn-container > a {
+		width: 50%!important;
+	}
 }
+
+
+	
 
 
