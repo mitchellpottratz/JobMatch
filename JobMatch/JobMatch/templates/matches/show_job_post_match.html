@@ -9,6 +9,33 @@
 		border: 1px solid lightgrey;
 		box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
 	}
+
+	@media only screen and (max-width: 778px) {
+		#job-post-details-container > .col-right {
+			border: none!important;
+		}
+		#job-post-details-container > .col-left {
+			text-align: center;
+		}
+		#job-post-details-container > .col-left small {
+			margin-top: 0!important;
+			margin-bottom: 0!important;
+		}
+		#job-post-details-container > .col-left small:nth-child(2) {
+			display: inline!important;
+			margin-left: 10px;
+		}
+		#job-post-details-container > .col-left small:nth-child(3) {
+			margin-top: 10px!important;
+		}
+		#job-post-details-container > div {
+			margin-bottom: 20px;
+		}
+		.like-dislike-btn-container > a {
+			width: 50%!important;
+		}
+	}
+
 </style>
 
 {% endblock %}
@@ -17,7 +44,8 @@
 	<div class="card w-100 vh-100">
 		<div class="card-body">
 			{% if match is not None %}
-			<div class="w-100 text-center overflow-auto h-75 p-3 border border-secondary rounded" id="view-candidate-container">
+			<div class="w-100 text-center overflow-auto h-75 p-3 border border-secondary rounded"
+				 id="view-job-container-container">
 				<h4>{{ job_post.job_title }}</h4>
 				<div class="mt-2 d-flex justify-content-center border-bottom border-secondary">
 					<p class="text-muted">
@@ -27,28 +55,28 @@
 				</div>
 				
 
-				<div class="row text-left mt-4 px-4">
-					<div class="col-8 border-right border-secondary">
+				<div class="row text-left mt-4 " id="job-post-details-container">
+					<div class="col-12 col-md-4 px-4 text-muted col-left">
+						<small>
+							<i class="far fa-building mr-1"></i>
+							{{ job_post.employment_type }}
+						</small>
+						<small class="d-block my-3">
+							<i class="fas fa-briefcase mr-1"></i>
+							{{ job_post.industry }}
+						</small>
+						<small class="d-block pb-0 mb-0">Skills</small>
+						{% for skill in skills %}
+							<span class="badge badge-primary mr-1 mt-2 py-2 px-3 font-weight-normal">
+								{{ skill.name }}
+							</span>
+						{% endfor %}
+					</div>
+					<div class="col-12 col-md-8 border-left border-secondary col-right">
 						<small class="text-muted">
 							{{ job_post.description | safe }}	
 						</small>
 					</div> 
-					<div class="col-4 px-4 text-muted">
-						<p>
-							<i class="far fa-building mr-1"></i>
-							{{ job_post.employment_type }}
-						</p>
-						<p>
-							<i class="fas fa-briefcase mr-1"></i>
-							{{ job_post.industry }}
-						</p>
-						<p class="pb-0 mb-0">Skills</p>
-						{% for skill in skills %}
-							<span class="badge badge-primary mr-3 mt-2 py-2 px-3 font-weight-normal">
-								{{ skill.name }}
-							</span><br>
-						{% endfor %}
-					</div>
 				</div>
 
 			</div>
@@ -66,3 +94,8 @@
 		</div>
 	</div>
 {% endblock %}
+
+
+
+
+

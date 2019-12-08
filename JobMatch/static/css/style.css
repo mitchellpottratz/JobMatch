@@ -78,6 +78,9 @@ embed {
 		display: block!important;
 		margin-top: 10px;
 	}
+	.like-dislike-btn-container > a {
+		width: 35%!important;
+	}
 }
 
 @media only screen and (max-width: 778px) {
