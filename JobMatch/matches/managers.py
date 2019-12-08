@@ -38,9 +38,7 @@ class MatchQuerySet(models.QuerySet):
 			company_liked=True,
 			candidate_liked=True
 		).order_by('-candidate_liked_timestamp')
-
-
-
+		
 
 
 

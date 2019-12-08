@@ -31,5 +31,8 @@ urlpatterns = [
 
 	# here is where candidates can see all of their matches
 	path('candidate/all/', views.candidate_matches, name='candidate_matches'),
+
+	# here is where candidates can view a single match
+	path('<id>/candidate/', views.show_match, name='show_match'),
 ]
 
