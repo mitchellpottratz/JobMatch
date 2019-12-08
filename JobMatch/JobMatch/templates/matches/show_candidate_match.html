@@ -5,25 +5,42 @@
 {% block head %}
 
 <style type="text/css">
+
+	@media only screen and (max-width: 993px) {
+		#experience-details-container {
+			display: block!important;
+		}
+		#experience-details-container > small {
+			display: block!important;
+			margin-top: 10px;
+		}
+	}
+
+	@media only screen and (max-width: 778px) {
+		#view-candidate-container .col {
+			height: auto!important;
+			margin-bottom: 20px;
+		}
+	}
 	
 </style>
 
 {% endblock %}
 
 {% block body %}
-	<div class="card vh-100">
+	<div class="card w-100 vh-100">
 		<div class="card-body">
 			{% if match is not None %}
 
-				<div class="w-100 h-75 p-3 border border-secondary rounded" id="view-candidate-container">
-					<div class="row h-100">
+				<div class="w-100 overflow-auto h-75 p-3 border border-secondary rounded" id="view-candidate-container">
+					<div class="row h-100 py-3">
 
-						<div class="col h-100 overflow-auto border-right border-right-secondary text-center">
+						<div class="col col-12 col-md-6 h-100 overflow-auto border-right border-right-secondary text-center">
 							<h4>{{ candidate_user_info.headline }}</h4>
 							<p>{{ candidate_user_info.bio }}</p>
 						</div>
 
-						<div class="col h-100 overflow-auto">
+						<div class="col col-12 col-md-6 h-100 overflow-auto">
 							<h4 class="text-center pb-2">Experiences</h4>
 							{% for experience in experiences %}
 								<div class="card mt-2">
@@ -31,7 +48,7 @@
 										{{ experience.title }}
 									</div>
 									<div class="card-body">
-										<div class="d-flex justify-content-between pb-1">
+										<div class="d-flex justify-content-between pb-1" id="experience-details-container">
 											<small class="text-muted">
 												<i class="fas fa-map-marker-alt mr-1"></i>
 												{{ experience.company }} - {{ experience.location }}
