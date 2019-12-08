@@ -41,11 +41,15 @@ def show_candidate_match(request, id):
 		# gets the candidate users experiences
 		experiences = candidate_user.experiences.all()
 
+		# gets all of the candidates users projects
+		projects = candidate_user.projects.all()
+
 	# if there are not anymore matches to see for the job post
 	else:
 		candidate_user = None
 		candidate_user_info = None
 		experiences = None
+		projects = None
 
 	# data being passed into the template
 	context = {
@@ -54,6 +58,7 @@ def show_candidate_match(request, id):
 		'candidate_user': candidate_user,
 		'candidate_user_info': candidate_user_info,
 		'experiences': experiences,
+		'projects': projects,
 	}
 	return render(request, 'matches/show_candidate_match.html', context)
 
