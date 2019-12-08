@@ -10,11 +10,10 @@ from .choices import EMPLOYMENT_TYPE_CHOICES
 class JobPostForm(forms.ModelForm):
 	employment_type = forms.ChoiceField(choices=EMPLOYMENT_TYPE_CHOICES)
 	description = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 10}))
-	skills = forms.ModelMultipleChoiceField(queryset=Skill.objects.all())
 
 	class Meta:
 		model = JobPost
-		exclude = ['user', 'company_account', 'last_updated', 'timestamp']
+		exclude = ['user', 'company_account', 'skills', 'last_updated', 'timestamp']
 
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)	
@@ -35,11 +34,6 @@ class JobPostForm(forms.ModelForm):
 		# adds bootstrap class for styling a checkbox to active field
 		self.fields['active'].widget.attrs.update({
 			'class': 'form-check-input'
-		})
-
-		# add a unique id to the skills field
-		self.fields['skills'].widget.attrs.update({
-			'id': 'skills-hidden-input'
 		})
 
 

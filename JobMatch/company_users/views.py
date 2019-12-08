@@ -59,6 +59,8 @@ def join(request):
 @login_required
 @no_company
 def create_company(request):
+	# gets the current user
+	user = request.user
 
 	# if the form was submitted
 	if request.method == 'POST':
@@ -69,9 +71,13 @@ def create_company(request):
 		# if the form is valid
 		if form.is_valid():
 			company = form.save(commit=False)
-			company.admin = request.user # the user that created th company becomes the admin
+			company.admin = user # the user that created th company becomes the admin
 			company.invite_code = generate_invite_code() # generates random invite code string
 			company.save()
+
+			# adds the company to the users company_account field
+			user.company_account = company 
+			user.save()
 			return redirect('/company-account/')
 
 	# if the https method is GET

@@ -51,30 +51,11 @@
 					</div>
 
 					<div class="form-group">
-						<label>Search for skills</label>
-						<div class="d-flex">
-							<input type="text" class="form-control mr-1" id='skill-search' name="skill-search">
-							<button class="btn btn-primary" id="add-skill-btn">Add</button>
-						</div>
-						<div class="card" id="skills-results-container">
-							<p class="text-muted text-center">Results</p>
-							<div id="skill-search-results">
-							</div>
-						</div>
-					</div>
-
-					<div class="form-group" id="added-skills-container">
-					
-					</div>
-
-					<div class="form-group">
 						<div class="form-check py-1">
 			    			{{ form.active }}
 			    			<label class="form-check-label">Would you like to post this job right after creating it?</label>
 				    	</div>
 					</div>
-
-					{{form.skills}}
 
 					<input type="submit" id="btn" class="btn btn-primary" value="Create">
 
@@ -86,8 +67,6 @@
 	<!-- script for google location autocomplete for the location form field -->
 	<script type="text/javascript" src="{% static 'js/googleLocationAutocomplete.js' %}"></script>
 
-	<!-- script for adding skills to the job post -->
-	<script type="text/javascript" src="{% static 'js/skills.js' %}"></script>
 {% endblock %}
 
 

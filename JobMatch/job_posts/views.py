@@ -41,7 +41,9 @@ def new_job_post(request):
 			job_post.user = request.user
 			job_post.company_account = request.user.company_account
 			job_post.save()
-			return redirect('/matches/create/' + job_post.id + '/')
+
+			# redirects to url to create matches
+			return redirect('/matches/create/' + str(job_post.id) + '/')
 
 		# if the form wasnt valid
 		else:
@@ -69,7 +71,9 @@ def update_job_post(request, id):
 		# if the form is valid
 		if form.is_valid():
 			form.save()
-			return redirect('/job-posts/')
+
+			# redirects to url to create matches
+			return redirect('/matches/create/' + str(job_post.id) + '/')
 
 		# if the form wasnt valid
 		else:
