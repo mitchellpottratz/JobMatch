@@ -143,8 +143,13 @@ def like_candidate(request, id):
 	match.company_user_liked = request.user
 	match.save()
 
-	# goes back to find matches page
-	return redirect('/matches/' + str(match.job_post.id))
+	# if the candidate liked the job post
+	if match.candidate_liked == True:
+		return redirect('/matches/company/match/')
+
+	# if the candidate has not liked the job post
+	else:
+		return redirect('/matches/' + str(match.job_post.id))
 
 
 # this view is where a candidate is disliked by a company
@@ -175,8 +180,13 @@ def like_job(request, id):
 	match.candidate_liked = True 
 	match.save()
 
-	# goes back to find matches page
-	return redirect('/matches/')
+	# if the company liked the candidate
+	if match.company_liked == True:
+		return redirect('/matches/candidate/match/')
+
+	# if the company has not liked the candidate
+	else:
+		return redirect('/matches/')
 
 
 # this view is where a job post is liked by a candidate@login_required
@@ -192,15 +202,6 @@ def dislike_job(request, id):
 
 	# goes back to find matches page
 	return redirect('/matches/')
-
-
-
-
-
-
-
-
-
 
 
 
