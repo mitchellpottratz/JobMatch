@@ -8,7 +8,7 @@ from .managers import ExperienceQuerySet
 # represents a candidate users experience
 class Experience(models.Model):
 	# user the experience belongs to 
-	user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+	user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='experiences')
 
 	# info about the experience
 	title = models.CharField(max_length=150)

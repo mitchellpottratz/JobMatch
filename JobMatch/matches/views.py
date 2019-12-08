@@ -38,6 +38,9 @@ def show_candidate_match(request, id):
 		# gets the candidates user info 
 		candidate_user_info = CandidateInfo.objects.get(user=candidate_user)
 
+		# gets the candidate users experiences
+		experiences = candidate_user.experiences.all()
+
 	# if there are not anymore matches to see for the job post
 	else:
 		candidate_user = None
@@ -48,7 +51,8 @@ def show_candidate_match(request, id):
 		'job_post': job_post,
 		'match': match,
 		'candidate_user': candidate_user,
-		'candidate_user_info': candidate_user_info
+		'candidate_user_info': candidate_user_info,
+		'experiences': experiences,
 	}
 	return render(request, 'matches/show_candidate_match.html', context)
 
