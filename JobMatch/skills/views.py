@@ -72,10 +72,10 @@ def search(request):
 
 
 @login_required
-def delete_skill(request, id):
+def delete_skill(request, name):
 	# gets the current user
 	user = request.user
-	
+
 	data = {}
 
 	# if the method is post
@@ -86,10 +86,9 @@ def delete_skill(request, id):
 			print('candidate user deleting skill')
 
 			# deletes the skill from the candidate users candidate info
-			candidate_info = CandidateInfo.objects.get(user=user).skills.get(id=id)
-			candidate_info.delete()
-			candidate_info.save()
-			print('skill deleted')
+			candidate_skill = CandidateInfo.objects.get(user=user).skills.remove(
+				Skill.objects.get(name=name)
+			)
 			data = {
 				'message': 'Skill successfully deleted'
 			}

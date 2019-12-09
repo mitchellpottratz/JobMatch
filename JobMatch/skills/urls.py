@@ -11,5 +11,5 @@ urlpatterns = [
 
 	# this is where skills can be deleted from either a candidate user
 	# or a job post
-	path('delete/<id>/', views.delete_skill, name='delete_skill')
+	path('delete/<name>/', views.delete_skill, name='delete_skill')
 ]

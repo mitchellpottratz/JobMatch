@@ -6,16 +6,6 @@
 
 {% load static %}
 
-<!-- this links the tinymce javascript for the tinymce text editor -->
-{{ form.media }}
-
-<!-- Moment.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js" integrity="sha256-VBLiveTKyUZMEzJd6z2mhfxIqz3ZATCuVMawPZGzIfA=" crossorigin="anonymous"></script>
-
-<!-- Tempus Dominus Bootstrap 4 -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.min.css" integrity="sha256-XPTBwC3SBoWHSmKasAk01c08M6sIA5gF5+sRxqak2Qs=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/js/tempusdominus-bootstrap-4.min.js" integrity="sha256-z0oKYg6xiLq3yJGsp/LsY9XykbweQlHl42jHv2XTBz4=" crossorigin="anonymous"></script>
-
 <style type="text/css">
     #skills-results-container {
         display: none;
@@ -49,6 +39,7 @@
 <div class="row py-4">
     <div class="col-2"></div>  
     <div class="col-8">
+
         <div class="card card-body">
             <form method="POST">
                 {% csrf_token %}
@@ -114,20 +105,20 @@
 
     // listens for a skill badge to be clicked    
     $('.skill-badge').on('click', function() {
-        console.log('skill clicked')
-
+        const $skillBadge = $(this)
         // make ajax call to delete the skill
         $.ajax({
-            url: '/skills/delete/' + $(this).attr('skillId') + '/',
+            url: '/skills/delete/' + skillText + '/',
             method: 'POST',
             data: {
               'user_id': $(this).attr('userId'),
-              'csrfmiddlewaretoken': $(this).attr('csrfToken')
+              'csrfmiddlewaretoken': $skillBadge.attr('csrfToken')
             },
             dataType: 'json',
             success:function(data) {
                 console.log('success data:', data)
-                $(this).remove()
+                // removes the skill from the DOM
+                $skillBadge.remove()
             }
         })
     })
