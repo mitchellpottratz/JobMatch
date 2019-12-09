@@ -65,19 +65,20 @@
         </div>
         <div class="card card-body mt-4">
             <h5 class="card-title">Current Skills</h5>
-            <div class="row">
 
             <!-- if the job post has atleast one skill -->
             {% if job_post_skills.count > 0 %}
 
+            <div class="d-flex flex-wrap">
                 {% for skill in job_post_skills %}
-                <div class="col-3 mt-2">
-                    <span class="badge badge-primary py-2 w-100 skill-badge" dataId="{{ job_post.id }}"
+                <span>
+                    <span class="badge badge-primary py-2 mr-3 mt-2 skill-badge" dataId="{{ job_post.id }}"
                           csrfToken="{{ csrf_token }}">
                         {{ skill.name }}
                     </span>
-                </div>
+                </span>
                 {% endfor %} 
+            </div>
 
             <!-- if the job post does not have any skills added -->
             {% else %}
@@ -86,7 +87,6 @@
                 </p>     
             {% endif %}    
 
-            </div>
         </div>
     </div> 
     <div class="col-2"></div>      
