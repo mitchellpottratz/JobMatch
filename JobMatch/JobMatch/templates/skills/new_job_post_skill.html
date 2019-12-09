@@ -72,8 +72,8 @@
 
                 {% for skill in job_post_skills %}
                 <div class="col-3 mt-2">
-                    <span class="badge badge-primary py-2 w-100 skill-badge" skillId="{{ skill.id }}"
-                          userId="{{ user.id }}" csrfToken="{{ csrf_token }}">
+                    <span class="badge badge-primary py-2 w-100 skill-badge" dataId="{{ job_post.id }}"
+                          csrfToken="{{ csrf_token }}">
                         {{ skill.name }}
                     </span>
                 </div>
@@ -123,7 +123,7 @@
             url: '/skills/delete/' + skillText + '/',
             method: 'POST',
             data: {
-              'user_id': $(this).attr('userId'),
+              'data_id': $(this).attr('dataId'),
               'csrfmiddlewaretoken': $skillBadge.attr('csrfToken')
             },
             dataType: 'json',
@@ -136,3 +136,15 @@
     })
 </script> 
 {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -73,13 +73,10 @@ def create_job_post_skill(request, id):
 		else:
 			# gets the skill by its naem
 			skill = Skill.objects.get(name=name)
-		print('job post being added to:', job_post)
-		print('job posts current skills:', job_post_skills)
-		print('skill being added:', skill)
+
 		# adds the skill to the job post
 		job_post.skills.add(skill)
 		job_post.save()
-		print('skills added')
 
 	# data being passed to template
 	context = {
@@ -119,8 +116,6 @@ def delete_skill(request, name):
 
 		# if it is a candidate user deleting the skill
 		if user.candidate_user:
-			print('candidate user deleting skill')
-
 			# deletes the skill from the candidate users candidate info
 			candidate_skill = CandidateInfo.objects.get(user=user).skills.remove(
 				Skill.objects.get(name=name)
@@ -134,7 +129,7 @@ def delete_skill(request, name):
 			print('company user deleting skill')
 
 			# removes the skill from the job post
-			job_post_skill = JobPost.objects.get(id=request.POST.get('job_post_id')).remove(
+			job_post_skill = JobPost.objects.get(id=request.POST.get('data_id')).skills.remove(
 				Skill.objects.get(name=name)
 			)
 			data = {
