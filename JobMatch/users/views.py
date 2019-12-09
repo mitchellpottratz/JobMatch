@@ -16,25 +16,30 @@ from .forms import RegisterForm
 
 # this view is where people register for a CompanyUser account
 def register(request):
-
 	# if the registration form was submitted
 	if request.method == 'POST':
-		print('method is post')
-
 		# pass the form data to the RegisterForm
-		form = RegisterForm(request.POST)
+		form = RegisterForm(request.POST, request.FILES)
+		print('file being uploaded:', request.FILES)
 
 		# if the form is valid
 		if form.is_valid():
-	
 			# creates the user
 			form.save()
 
-			# authenticates the user and logs them in
+			# authenticates the user
 			user = authenticate(
 				username=form.cleaned_data.get('username'),
 				password=form.cleaned_data.get('password1')
 			)
+
+			# if there was an image upload in the form 
+			if form.cleaned_data.get('image') is not None:
+				# set the users imae and save it
+				user.image = form.cleaned_data.get('image')
+				user.save()
+
+			# logs the users in
 			auth_login(request, user)
 
 			# if the user is a company user
@@ -47,9 +52,7 @@ def register(request):
 				# take them to the page where they fill out the 
 				# rest of their account information
 				return redirect('/candidate-users/complete-info/')
-		else:
-			print(form.errors)
-
+				
 	# if the form was not submitted
 	else:
 		form = RegisterForm()
@@ -59,7 +62,6 @@ def register(request):
 
 # this is where candidate or company users login
 def login(request):
-
 	# if the form was submitted
 	if request.method == 'POST':
 
