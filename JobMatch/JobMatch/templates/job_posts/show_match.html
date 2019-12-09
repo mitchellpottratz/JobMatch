@@ -19,7 +19,7 @@
 
 <div class="row mt-4">
 
-	<div class="col-4">
+	<div class="col-12 col-md-4">
 		<div class="card card-body">
 			<h5>{{ candidate_info.headline }}</h5>
 			<small class="text-muted">
@@ -30,7 +30,7 @@
 			<p>{{ candidate_info.bio }}</p>
 		</div>
 
-		<div class="card card-body mt-3">
+		<div class="card card-body my-2">
 			<h5 class="card-title">Skills</h5>
 			<div class="d-flex flex-wrap">
 				{% for skill in skills %}
@@ -44,7 +44,7 @@
 		</div>
 	</div>	
 
-	<div class="col-8">
+	<div class="col-12 col-md-8">
 		<div class="card card-body">
 			<h5 class="card-title">Experience</h5>
 
@@ -139,7 +139,6 @@
 
 		</div>
 	</div>	
-
 </div>
 
 {% endblock %}
