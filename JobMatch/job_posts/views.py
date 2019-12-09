@@ -23,7 +23,7 @@ def all_job_posts(request):
 	# gets all of the job posts
 	job_posts = JobPost.objects.all_company_posts(request.user.company_account)
 
-	return render(request, 'job_posts/index.html', {'job_posts': job_posts})
+	return render(request, 'job_posts/index.html', {'job_posts': job_posts, 'nav': 'job_post'})
 
 
 # this view renders a page where company users can create 
@@ -53,7 +53,7 @@ def new_job_post(request):
 	else:
 		form = JobPostForm()
 
-	return render(request, 'job_posts/new.html', {'form': form})
+	return render(request, 'job_posts/new.html', {'form': form, 'nav': 'new_job_post'})
 
 
 # this view renders a page where company users can edit a job post
@@ -86,7 +86,7 @@ def update_job_post(request, id):
 	else:
 		form = JobPostForm(instance=job_post)
 
-	return render(request, 'job_posts/edit.html', {'form': form})
+	return render(request, 'job_posts/edit.html', {'form': form, 'nav': 'job_post'})
 
 
 # here is where companies can see all of the matches for a job post
@@ -103,7 +103,8 @@ def show_matches(request, id):
 	# data being passed to the template
 	context = {
 		'job_post': job_post,
-		'matches': matches
+		'matches': matches,
+		'nav': 'job_post'
 	}
 	return render(request, 'job_posts/show_matches.html', context)
 
@@ -137,7 +138,8 @@ def show_match(request, job_post_id, match_id):
 		'candidate_info': candidate_info,
 		'skills': skills,
 		'experiences': experiences,
-		'projects': projects
+		'projects': projects,
+		'nav': 'job_post'
 	}
 	return render(request, 'job_posts/show_match.html', context)
 

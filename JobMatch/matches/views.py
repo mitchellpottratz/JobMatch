@@ -64,6 +64,7 @@ def show_candidate_match(request, id):
 		'experiences': experiences,
 		'projects': projects,
 		'skills': skills,
+		'nav': 'job_post'
 	}
 	return render(request, 'matches/show_candidate_match.html', context)
 
@@ -246,7 +247,8 @@ def company_match(request, id):
 	context = {
 		'match': match,
 		'candidate_user': candidate_user,
-		'candidate_user_info': candidate_user_info
+		'candidate_user_info': candidate_user_info,
+		'nav': 'job_post'
 	}
 	return render(request, 'matches/company_match.html', context)
 

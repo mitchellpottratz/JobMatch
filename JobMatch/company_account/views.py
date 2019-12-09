@@ -19,8 +19,13 @@ def index(request):
 	# data being passed into the template
 	context = {
 		'user': user,
-		'company': company
+		'company': company,
+		'nav': 'account'
 	}
 	return render(request, 'company_account/index.html', context)
+
+
+
+
 
 

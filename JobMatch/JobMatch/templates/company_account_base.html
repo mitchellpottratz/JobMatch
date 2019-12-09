@@ -24,19 +24,48 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 
 	{% block head %}{% endblock %}
+
+	<style type="text/css">
+		.account-navigation {
+			background-color: white;
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+		}
+
+		.account-navigation .nav-item {
+			border: 1px solid #007bff;
+		}
+
+	</style>
 </head>
 <body>
 	<div class="container">
 		{% block body %}
 		{% endblock %}
-		<nav class="nav nav-pills nav-fill account-navigation">
-			<a href="/company-account/" class="nav-item nav-link" id="account-link">Account</a>
-			<a href="/job-posts/" class="nav-item nav-link" id="job-posts-link">Job Posts</a>
-			<a href="/job-posts/new" class="nav-item nav-link" id="new-job-post-link">New Job Post</a>
-			<a href="#" class="nav-item nav-link" id="notifications-link">Notifications</a>
-		</nav>
-	</div>
-	<script type="text/javascript" src="{% static 'js/companyAccountNavigation.js' %}"></script>
+		<ul class="nav nav-pills nav-justified account-navigation">
+		    <li class="nav-item">
+		        <a class="nav-link {% if nav == 'account' %}active{% endif %}" href="/company-account/">
+		        	Account
+		    	</a>
+		    </li>
+		    <li class="nav-item">
+		        <a class="nav-link {% if nav == 'job_post' %}active{% endif %}" href="/job-posts/">
+		        	Job Posts
+		        </a>
+		  	</li>
+		    <li class="nav-item">
+		        <a class="nav-link {% if nav == 'new_job_post' %}active{% endif %}" href="/job-posts/new/">
+		        	New Job Post
+		        </a>
+		    </li>
+		    <li class="nav-item">
+		    	<a class="nav-link {% if nav == 'messages' %}active{% endif %}" href="/messages/">
+		    		Messages
+		    	</a>
+		  	</li>
+		</ul>
 </body>
 </html>
 
