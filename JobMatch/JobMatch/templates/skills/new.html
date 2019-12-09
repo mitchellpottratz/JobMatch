@@ -6,32 +6,6 @@
 
 {% load static %}
 
-<style type="text/css">
-    #skills-results-container {
-        display: none;
-        z-index: 2;
-        width: 100%;
-        max-height: 150px;
-        overflow-y: scroll;
-        position: absolute;
-    }
-
-    .skill-result {
-        border-top: 1px solid lightgrey;
-        padding-top: 10px;
-    }
-
-    .skill-result:hover {
-        cursor: pointer;
-        opacity: 0.7;
-    }
-
-    .skill-badge-hover {
-        background-color: red;
-        cursor: pointer;
-    }
-</style>
-
 {% endblock %}
 
 {% block body %}
@@ -65,64 +39,32 @@
         </div>
         <div class="card card-body mt-4">
             <h5 class="card-title">Your Skills</h5>
-            <div class="row">
+            {% if users_skills.count > 0 %}
+            <div class="d-flex flex-wrap">
                 {% for skill in users_skills %}
-                <div class="col-3 mt-2">
-                    <span class="badge badge-primary py-2 w-100 skill-badge" skillId="{{ skill.id }}"
-                          userId="{{ user.id }}" csrfToken="{{ csrf_token }}">
+                <span>
+                    <span class="badge badge-primary py-2 mr-3 mt-2 skill-badge" csrfToken="{{ csrf_token }}">
                         {{ skill.name }}
                     </span>
-                </div>
+                </span>
                 {% endfor %} 
             </div>
+            {% else %}
+            <p class="text-muted text-center">
+                You do not have any skills added
+            </p>
+            {% endif %}
         </div>
     </div> 
     <div class="col-2"></div>      
 </div>
 
+<!-- notification box -->
+<div class="alert alert-success notification" id="skillNotification" role="alert">
+</div>
+
 <!-- script for adding skills to the job post -->
 <script type="text/javascript" src="{% static 'js/skills.js' %}"></script>
-
-<script type="text/javascript">
-
-    // holds the text of the skill being hovered over
-    let skillText
-
-    // listens for the mouse to enter or leave a skill badge
-    $('.skill-badge').hover(
-
-        // function excecutes when the mouse enters
-        function() {
-            skillText = $(this).text().trim()
-            $(this).addClass('skill-badge-hover')
-            $(this).text('Delete')
-    
-        // function executes when the mouse leaves
-        }, function() {
-            $(this).removeClass('skill-badge-hover')
-            $(this).text(skillText)
-        })
-
-    // listens for a skill badge to be clicked    
-    $('.skill-badge').on('click', function() {
-        const $skillBadge = $(this)
-        // make ajax call to delete the skill
-        $.ajax({
-            url: '/skills/delete/' + skillText + '/',
-            method: 'POST',
-            data: {
-              'user_id': $(this).attr('userId'),
-              'csrfmiddlewaretoken': $skillBadge.attr('csrfToken')
-            },
-            dataType: 'json',
-            success:function(data) {
-                console.log('success data:', data)
-                // removes the skill from the DOM
-                $skillBadge.remove()
-            }
-        })
-    })
-</script> 
 {% endblock %}
 
 
