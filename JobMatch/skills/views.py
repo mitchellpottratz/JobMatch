@@ -1,5 +1,5 @@
 # django imports 
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from django.forms.models import model_to_dict
 from django.contrib.auth.decorators import login_required
@@ -7,26 +7,25 @@ from django.contrib.auth.decorators import login_required
 # model imports 
 from .models import Skill
 from candidate_users.models import CandidateInfo
+from job_posts.models import JobPost
 
-# creates a new skill
+
+# creates a new skill for a candidate user
 @login_required
 def add_candidate_skill(request):
-
 	# gets the current user
 	user = request.user
 
 	# gets all of the candidates skills
 	users_skills = CandidateInfo.objects.get(user=user).skills.all()
 
-	# POST is the only method allowed for this view 
+	# if the form was submitted
 	if request.method == 'POST':
-
 		# gets the name of the skill
 		name = request.POST.get('skill-name')
 
 		# if the skills doesnt already exist
 		if not Skill.objects.filter(name=name):
-
 			# creates a new skill
 			skill = Skill.objects.create(name=name)
 
@@ -50,8 +49,45 @@ def add_candidate_skill(request):
 
 # adds a skill to a job post
 @login_required
-def add_job_post_skill(request, id):
-	return render(request, 'skills/new_job_post_skill.html')
+def create_job_post_skill(request, id):
+	# gets the current user
+	user = request.user
+
+	# gets the job post
+	job_post = get_object_or_404(JobPost, id=id)
+
+	# gets the job posts skills
+	job_post_skills = job_post.skills.all()
+
+	# if the form was submitted
+	if request.method == 'POST':
+		# gets the name of the skill
+		name = request.POST.get('skill-name')
+
+		# if the skills doesnt already exist
+		if not Skill.objects.filter(name=name):
+			# creates a new skill
+			skill = Skill.objects.create(name=name)
+
+		# if skill already exists
+		else:
+			# gets the skill by its naem
+			skill = Skill.objects.get(name=name)
+		print('job post being added to:', job_post)
+		print('job posts current skills:', job_post_skills)
+		print('skill being added:', skill)
+		# adds the skill to the job post
+		job_post.skills.add(skill)
+		job_post.save()
+		print('skills added')
+
+	# data being passed to template
+	context = {
+		'user': user,
+		'job_post': job_post,
+		'job_post_skills': job_post_skills,
+	}
+	return render(request, 'skills/new_job_post_skill.html', context)
 
 
 
@@ -96,6 +132,14 @@ def delete_skill(request, name):
 		# if it is a company user deleting a skill from a job post
 		else:
 			print('company user deleting skill')
+
+			# removes the skill from the job post
+			job_post_skill = JobPost.objects.get(id=request.POST.get('job_post_id')).remove(
+				Skill.objects.get(name=name)
+			)
+			data = {
+				'message': 'Skill successfully deleted from job post'
+			}
 
 	# if the method is not post
 	else:

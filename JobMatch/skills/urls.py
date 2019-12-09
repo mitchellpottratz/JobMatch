@@ -6,6 +6,8 @@ urlpatterns = [
 	# here is where a candidate can add skills
 	path('add/', views.add_candidate_skill, name='add_candidate_skill'),
 
+	path('create/job-post/<id>/', views.create_job_post_skill, name='create_job_post_skill'),
+
 	# this is where skills are searched for
 	path('search/', views.search, name='search'),
 
