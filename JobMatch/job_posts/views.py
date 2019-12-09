@@ -1,6 +1,7 @@
 # django imports
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
 
 # import decorator that checks if current user is a company user
 from company_account.decorators import company_account_required
@@ -30,7 +31,6 @@ def all_job_posts(request):
 @login_required
 @company_account_required
 def new_job_post(request):
-
 	# if the form was submitted
 	if request.method == 'POST':
 		form = JobPostForm(request.POST)
@@ -60,7 +60,6 @@ def new_job_post(request):
 @login_required
 @company_account_required
 def update_job_post(request, id):
-
 	# gets the job post
 	job_post = JobPost.objects.get(id=id)
 	
@@ -70,7 +69,11 @@ def update_job_post(request, id):
 
 		# if the form is valid
 		if form.is_valid():
-			form.save()
+			# updated the job post
+			job_post = form.save(commit=False)
+			job_post.user = request.user
+			job_post.last_updated = timezone.now()
+			job_post.save()
 
 			# redirects to url to create matches
 			return redirect('/matches/create/' + str(job_post.id) + '/')
