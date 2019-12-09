@@ -13,6 +13,7 @@ from candidate_users.models import CandidateInfo
 def add_candidate_skill(request):
 
 	# gets all of the candidates skills
+	users_skills = CandidateInfo.objects.get(user=request.user).skills.all()
 
 	# POST is the only method allowed for this view 
 	if request.method == 'POST':
@@ -36,7 +37,7 @@ def add_candidate_skill(request):
 		candidate_info.skills.add(skill)
 		candidate_info.save()
 
-	return render(request, 'skills/new.html')
+	return render(request, 'skills/new.html', {'users_skills': users_skills})
 
 
 # adds a skill to a job post
