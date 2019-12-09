@@ -115,10 +115,18 @@ def show_match(request, job_post_id, match_id):
 	# gets the match 
 	match = get_object_or_404(Match, id=match_id)
 
+	# gets the candidates info for the user the match is with
+	candidate_info = match.candidate_user.candidate_info
+
+	# gets the candidates skills
+	skills = candidate_info.skills.all()
+
 	# data being passed to template
 	context = {
 		'job_post': job_post,
-		'match': match
+		'match': match,
+		'candidate_info': candidate_info,
+		'skills': skills
 	}
 	return render(request, 'job_posts/show_match.html', context)
 

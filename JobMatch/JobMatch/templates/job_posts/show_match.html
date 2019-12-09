@@ -16,4 +16,44 @@
 		</div>
 	</div>
 </div>
+
+<div class="row mt-4">
+
+	<div class="col-4">
+		<div class="card card-body">
+			<h5>{{ candidate_info.headline }}</h5>
+			<small class="text-muted">
+				<i class="fas fa-map-marker-alt mr-1"></i>
+				{{ candidate_info.location }}
+			</small>
+			<strong class="d-block mt-4">About</strong>
+			<p>{{ candidate_info.bio }}</p>
+		</div>
+
+		<div class="card card-body mt-3">
+			<h5 class="card-title">Skills</h5>
+			<div class="d-flex flex-wrap">
+				{% for skill in skills %}
+				<span>
+					<span class="badge badge-primary mr-1 mt-2 py-2 px-3 font-weight-normal">
+						{{ skill.name }}
+					</span>
+				</span>
+				{% endfor %}
+			</div>
+		</div>
+	</div>	
+
+	<div class="col-8">
+		<div class="card card-body">
+			<h5 class="card-title">Experience</h5>
+		</div>
+
+		<div class="card card-body mt-3">
+			<h5 class="card-title">Projects</h5>
+		</div>
+	</div>	
+
+</div>
+
 {% endblock %}
