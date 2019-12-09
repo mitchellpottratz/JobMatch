@@ -40,6 +40,7 @@ class JobPost(models.Model):
 
 	timestamp = models.DateTimeField(default=timezone.now())
 
+	# query manager
 	objects = JobPostQuerySet.as_manager()
 
 	def __str__(self):

@@ -92,6 +92,8 @@ def create_job_post_skill(request, id):
 # and returns a json response of skills that similarly match the string
 @login_required
 def search(request):
+	# gets the current user
+
 	# get the search string from the ajax call
 	skill = request.GET.get('skill_string')
 
@@ -118,9 +120,11 @@ def delete_skill(request, name):
 		# if it is a candidate user deleting the skill
 		if user.candidate_user:
 			# deletes the skill from the candidate users candidate info
-			candidate_skill = CandidateInfo.objects.get(user=user).skills.remove(
+			candidate_info = CandidateInfo.objects.get(user=user)
+			candidate_info.skills.remove(
 				Skill.objects.get(name=name)
 			)
+			candidate_info.save()
 			data = {
 				'message': 'Skill successfully deleted'
 			}
@@ -128,11 +132,13 @@ def delete_skill(request, name):
 		# if it is a company user deleting a skill from a job post
 		else:
 			# removes the skill from the job post
-			job_post_skill = JobPost.objects.get(id=request.POST.get('data_id')).skills.remove(
+			job_post = JobPost.objects.get(id=request.POST.get('data_id'))
+			job_post.skills.remove(
 				Skill.objects.get(name=name)
 			)
+			job_post.save()
 			data = {
-				'message': 'Skill successfully deleted from job post'
+				'message': '"' + name + '" successfully deleted from job post'
 			}
 
 	# if the method is not post

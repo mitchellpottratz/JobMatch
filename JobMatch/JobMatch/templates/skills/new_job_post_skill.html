@@ -30,16 +30,23 @@
         background-color: red;
         cursor: pointer;
     }
+
+    .notification {
+        position: absolute;
+        left: 25%;
+        bottom: 40px;
+        width: 50%;
+        z-index: 10;
+        display: none;
+    }
 </style>
 
 {% endblock %}
 
 {% block body %}
-
 <div class="row py-4">
     <div class="col-2"></div>  
-    <div class="col-8">
-
+    <div class="col-8 mt-4">
         <div class="card card-body">
             <form method="POST">
                 {% csrf_token %}
@@ -92,6 +99,11 @@
     <div class="col-2"></div>      
 </div>
 
+<!-- notification box -->
+<div class="alert alert-success notification" id="skillNotification" role="alert">
+    dfd
+</div>
+
 <!-- script for adding skills to the job post -->
 <script type="text/javascript" src="{% static 'js/skills.js' %}"></script>
 
@@ -99,6 +111,7 @@
 
     // holds the text of the skill being hovered over
     let skillText
+    let skillBadgeWidth
 
     // listens for the mouse to enter or leave a skill badge
     $('.skill-badge').hover(
@@ -106,8 +119,10 @@
         // function excecutes when the mouse enters
         function() {
             skillText = $(this).text().trim()
+            skillBadgeWidth = $(this).css('width')
             $(this).addClass('skill-badge-hover')
-            $(this).text('Delete')
+            $(this).css('width', skillBadgeWidth)
+            $(this).html('<i class="fas fa-trash-alt"></i>')
     
         // function executes when the mouse leaves
         }, function() {
@@ -131,9 +146,27 @@
                 console.log('success data:', data)
                 // removes the skill from the DOM
                 $skillBadge.remove()
+
+                // removes the skills parent element from the DOM
+                $skillBadge.parent().remove()
+
+                // shows a notification
+                showNotification(data.message, '#skillNotification')
             }
         })
     })
+
+    // shows a notification
+    showNotification = (text, id) => {
+        console.log('notification called')
+        $(id).text(text)
+        $(id).fadeIn(500)
+
+        // hides the notification after 2 seconds
+        setTimeout(function(){
+            $('.notification').fadeOut(500)
+        }, 2000)
+    }
 </script> 
 {% endblock %}
 
