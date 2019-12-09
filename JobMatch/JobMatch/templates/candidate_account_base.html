@@ -27,13 +27,32 @@
 	<div class="container">
 		{% block body %}
 		{% endblock %}
-		<nav class="nav nav-pills nav-fill account-navigation">
-			<a href="/candidate-account/" class="nav-item nav-link" id="account-link">Account</a>
-			<a href="/matches/" class="nav-item nav-link" id="job-posts-link">Find Matches</a>
-			<a href="/matches/candidate/all/" class="nav-item nav-link" id="new-job-post-link">Matches</a>
-			<a href="#" class="nav-item nav-link" id="notifications-link">Notifications</a>
-		</nav>
+		<ul class="nav nav-pills nav-justified account-navigation">
+		    <li class="nav-item">
+		        <a class="nav-link {% if nav == 'account' %}active{% endif %}" href="/candidate-account/">
+		        	<i class="far fa-user-circle mr-1"></i>
+		        	Account
+		    	</a>
+		    </li>
+		    <li class="nav-item">
+		        <a class="nav-link {% if nav == 'find_matches' %}active{% endif %}" href="/matches/">
+		        	<i class="fas fa-briefcase mr-1"></i>
+		        	Find Matches
+		        </a>
+		  	</li>
+		    <li class="nav-item">
+		        <a class="nav-link {% if nav == 'matches' %}active{% endif %}" href="/matches/candidate/all/">
+		        	<i class="far fa-plus-square mr-1"></i>
+		        	Matches
+		        </a>
+		    </li>
+		    <li class="nav-item">
+		    	<a class="nav-link {% if nav == 'messages' %}active{% endif %}" href="/messages/">
+		    		<i class="far fa-envelope mr-1"></i>
+		    		Messages
+		    	</a>
+		  	</li>
+		</ul>
 	</div>
-	<!-- <script type="text/javascript" src="{% static 'js/companyAccountNavigation.js' %}"></script> -->
 </body>
 </html>

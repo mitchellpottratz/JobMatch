@@ -23,7 +23,20 @@ body {
 }
 
 .account-navigation .nav-item {
-	border: 1px solid #007bff;
+	border-top: none;
+	border-bottom: none;
+	border-right: 1px solid lightgrey;
+	border-left: 1px solid lightgrey;
+}
+
+.account-navigation > .nav-item > a {
+	font-size: 0.85rem;
+	padding: 10px 0;
+}
+
+.account-navigation .nav-item:hover {
+	opacity: 0.8;
+	background-color: lightgrey;
 }
 
 #skills-results-container {

@@ -32,6 +32,7 @@ def index(request):
 		'projects': projects,
 		'experiences': experiences,
 		'skills': skills,
+		'nav': 'account'
 	}
 
 	return render(request, 'candidate_account/index.html', context)

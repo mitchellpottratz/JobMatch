@@ -106,7 +106,8 @@ def show_job_post_match(request):
 		'match': match,
 		'job_post': job_post,
 		'company': company,
-		'skills': skills
+		'skills': skills,
+		'nav': 'find_matches'
 	}
 	return render(request, 'matches/show_job_post_match.html', context)
 
@@ -269,7 +270,8 @@ def candidate_match(request, id):
 	context = {
 		'match': match,
 		'job_post': job_post,
-		'company': company
+		'company': company,
+		'nav': 'find_matches'
 	}
 	return render(request, 'matches/candidate_match.html', context)
 
@@ -281,7 +283,7 @@ def candidate_matches(request):
 	# gets all of the candidates users matches 
 	matches = Match.objects.get_candidates_matches(request.user)
 
-	return render(request, 'matches/candidate_matches.html', {'matches': matches})
+	return render(request, 'matches/candidate_matches.html', {'matches': matches, 'nav': 'matches'})
 
 
 # this view display one of the candidate users matches
@@ -304,7 +306,8 @@ def show_match(request, id):
 		'match': match,
 		'job_post': job_post,
 		'company': company,
-		'skills': skills
+		'skills': skills,
+		'nav': 'matches'
 	}
 	return render(request, 'matches/show_match.html', context)
 
