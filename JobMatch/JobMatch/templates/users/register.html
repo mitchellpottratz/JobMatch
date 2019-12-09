@@ -10,7 +10,6 @@
 			<div class="card w-100">
 				<div class="card-body">
 			    	<h5 class="card-title">Register</h5>
-			    	
 			    	<form class="pb-3" method="POST">
 			    		{% csrf_token %}
 
@@ -33,16 +32,25 @@
 	  							{{ form.image }}
 	  							<label class="custom-file-label" for="customFile">Choose File</label>
 	  						</div>
+	  						{% for error in form.image.errors %}
+			    			<small class="d-block text-danger">{{ error }}</small>
+			    			{% endfor %}
 	  					</div>
 
 			    		<div class="form-group">
 			    			<label for="username">Username</label>
 			    			{{ form.username }}
+			    			{% for error in form.username.errors %}
+			    			<small class="d-block text-danger">{{ error }}</small>
+			    			{% endfor %}
 			    		</div>
 
 			    		<div class="form-group">
 			    			<label for="email">Email</label>
 			    			{{ form.email }}
+			    			{% for error in form.email.errors %}
+			    			<small class="d-block text-danger">{{ error }}</small>
+			    			{% endfor %}
 			    		</div>
 
 			    		<div class="form-group">
@@ -61,13 +69,15 @@
 			    				<div class="col">
 								    <label for="password">Password</label>
 								   	{{ form.password1 }}
-								   	<small>Password must be atleast 8 character</small>
 			    				</div>
 			    				<div class="col">
 			    					<label for="password">Confirm Password</label>
 								   	{{ form.password2 }}
 			    				</div>
 			    			</div>
+			    			{% for error in form.password2.errors %}
+			    			<small class="d-block text-danger">{{ error }}</small>
+			    			{% endfor %}
 	  					</div>
 
 			    		<input type="submit" class="btn btn-primary" value="Register">
