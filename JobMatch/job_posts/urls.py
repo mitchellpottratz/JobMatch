@@ -15,6 +15,9 @@ urlpatterns = [
 
 	# where company users can see all of the matches for a job post
 	path('<id>/matches/', views.show_matches, name='show_matches'),
+
+	# where company users can view one match from a job post
+	path('<job_post_id>/matches/<match_id>/', views.show_match, name='show_match')
 ]
 
 

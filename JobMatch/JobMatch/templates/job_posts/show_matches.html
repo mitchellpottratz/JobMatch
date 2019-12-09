@@ -1,26 +1,18 @@
 {% extends 'company_account_base.html' %}
 
-{% block title %}<title>Company User Dashboard</title>{% endblock %}
+{% block title %}<title>All Matches For {{ job_post.job_title }}</title>{% endblock %}
 
 {% block head %}
-
-<style type="text/css">
-	.card {
-		min-height: 100vh;
-	}
-</style>
 
 {% endblock %}
 
 {% block body %}
-
-<div class="card px-4">
+<div class="card vh-100 px-4">
 	<div class="card-body">
 	<h5 class="">Matches For {{ job_post.job_title }}</h5>
 		<div class="list-group mt-4">
-			
 			{% for match in matches %}
-			<a href="#" class="list-group-item list-group-item-action py-3">	
+			<a href="/job-posts/{{ job_post.id }}/matches/{{ match.id }}/" class="list-group-item list-group-item-action py-3">	
 				<div class="d-flex w-100 justify-content-between">
 					<div class="d-flex">
 						<img src="/media/users/default_profile_picture.png/" width="35" height="35" class="rounded-circle mr-3" alt="user profile image">
@@ -30,11 +22,7 @@
     			</div>
 			</a>
 			{% endfor %}
-
 		</div>
 	</div>
 </div>
-
-
-
 {% endblock %}

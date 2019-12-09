@@ -53,6 +53,13 @@ class Match(models.Model):
 	def get_job_title(self):
 		return self.job_post.job_title
 
+	# returns the canidate users full name
+	def get_candidate_full_name(self):
+		return self.candidate_user.get_full_name()
+
+	# returns the candidate users email
+	def get_candidate_email(self):
+		return self.candidate_user.email
 
 
 

@@ -105,6 +105,23 @@ def show_matches(request, id):
 	return render(request, 'job_posts/show_matches.html', context)
 
 
+# here is where companies can see one of there matches
+@login_required
+@company_account_required
+def show_match(request, job_post_id, match_id):
+	# gets the job post
+	job_post = get_object_or_404(JobPost, id=job_post_id)
+
+	# gets the match 
+	match = get_object_or_404(Match, id=match_id)
+
+	# data being passed to template
+	context = {
+		'job_post': job_post,
+		'match': match
+	}
+	return render(request, 'job_posts/show_match.html', context)
+
 
 
 
