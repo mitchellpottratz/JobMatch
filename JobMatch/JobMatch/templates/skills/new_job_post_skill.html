@@ -13,18 +13,17 @@
     <div class="col-2"></div>  
     <div class="col-8 mt-4">
         <div class="card card-body">
-            <form method="POST">
+            <form class="pb-4" method="POST">
                 {% csrf_token %}
-                <h5>Add a Skill To "{{ job_post.job_title }}"</h5>
+                <h5>Add a Skills To "{{ job_post.job_title }}"</h5>
                 <form method="POST">
+                    <small class="mb-4">
+                        Begin by searching for a skill you would like to add and results will begin to pop up. If you see 
+                        the skill you want to add, click it, then press the "Add Skill" button. If it does not pop up, type 
+                        out the whole skill and press the "Add Skill" button.
+                    </small>
                     <div class="form-group">
-                        <small class="mb-4">
-                            Begin by searching for a skill you would like to add and results will begin to pop up. If you see 
-                            the skill you want to add, click it, then press the "Add Skill" button. If it does not pop up, type 
-                            out the whole skill and press the "Add Skill" button.
-                        </small>
-                        <input type="text" class="form-control mt-3 mr-1" id='skill-search' name="skill-name" autocomplete="off"
-                               dataId="{{ job_post.id }}" placeholder="Start by searching for a skill...">
+                        <input type="text" class="form-control mt-3 mr-1" id='skill-search' name="skill-name" autocomplete="off"       dataId="{{ job_post.id }}" placeholder="Start by searching for a skill...">
                         <div class="card" id="skills-results-container">
                             <p class="text-muted text-center">Results</p>
                             <div id="skill-search-results">
@@ -34,6 +33,7 @@
                     <input type="submit" class="btn btn-primary" value="Add Skill">
                 </form>
             </form>
+            <a href="/matches/create/{{ job_post.id }}/" class="btn btn-primary">Finish</a>
         </div>
         <div class="card card-body mt-4">
             <h5 class="card-title">Current Skills</h5>

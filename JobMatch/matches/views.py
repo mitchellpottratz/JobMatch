@@ -72,6 +72,7 @@ def show_candidate_match(request, id):
 # like or dislike the job post
 @login_required
 def show_job_post_match(request):
+	# gets the current user
 	user = request.user
 
 	try:
