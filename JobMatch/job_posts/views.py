@@ -122,10 +122,10 @@ def show_match(request, job_post_id, match_id):
 	skills = candidate_info.skills.all()
 
 	# gets the candidate users experiences
-	experiences = match.candidate_user.experiences
+	experiences = match.candidate_user.experiences.all()
 
 	# gets the candidate users projects
-	projects = match.candidate_user.projects
+	projects = match.candidate_user.projects.all()
 
 	# data being passed to template
 	context = {

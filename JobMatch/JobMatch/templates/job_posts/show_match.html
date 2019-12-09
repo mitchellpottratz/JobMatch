@@ -51,6 +51,36 @@
 			<!-- if the candidate has atleast one experience -->
 			{% if experiences.count > 0 %}
 
+			<!-- iterates through all of the candidates experiences -->
+			{% for experience in experiences %}
+			<div class="card mt-2">
+				<div class="card-header">
+					{{ experience.title }}
+				</div>
+				<div class="card-body">
+					<div class="d-flex justify-content-between pb-1" id="experience-details-container">
+						<small class="text-muted">
+							<i class="fas fa-map-marker-alt mr-1"></i>
+							{{ experience.company }} - {{ experience.location }}
+						</small>
+						<small class="text-muted">
+							<i class="fas fa-briefcase mr-1"></i>
+							{{ experience.employment_type }}
+						</small>
+					</div>
+					<small class="text-muted pb-3">
+						<i class="fas fa-business-time mr-1"></i>
+						{{ experience.start_date }} - {{ experience.end_date }}
+					</small>
+
+					<div class="mt-2">
+						<small>
+							{{ experience.description | safe }}
+						</small>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
 
 			<!-- if the candidate doesnt have any experiences -->
 			{% else %}
@@ -65,8 +95,40 @@
 			<h5 class="card-title">Projects</h5>
 
 			<!-- if the candidate has atleast one project -->
-			{% if experiences.count > 0 %}
+			{% if projects.count > 0 %}
 
+			<!-- iterates through all of the candidates projects -->
+			{% for project in projects %}
+			<div class="card mt-3">
+				<div class="card-header text-center">
+					<img src="{{ project.image.url }}" width="30" height="30" class="rounded-circle mr-2" alt="project image"/>
+					{{ project.title }}
+				</div>
+				<div class="card-body">
+					<small class="text-muted">
+						<i class="fas fa-map-marker-alt mr-1"></i>
+						{{ project.associated_with }}
+					</small>
+					<small class="d-block text-muted pb-3">
+						<i class="fas fa-business-time mr-1"></i>
+						{{ project.start_date }} - {{ project.end_date }}
+					</small>
+					<div class="mt-2">
+						<small>
+							{{ project.description | safe }}
+						</small>
+					</div>
+				</div>
+				<div class="card-footer text-center">
+					<small>
+						<a href="{{ project.url }}" target="_blank">
+							<i class="fas fa-link mr-1"></i>
+							Link To Project
+						</a>
+					</small>
+				</div>
+			</div>
+			{% endfor %}
 
 			<!-- if the candidate doesnt have any projects -->
 			{% else %}
