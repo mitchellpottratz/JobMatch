@@ -35,9 +35,21 @@
 		}
 
 		.account-navigation .nav-item {
-			border: 1px solid #007bff;
+			border-top: none;
+			border-bottom: none;
+			border-right: 1px solid lightgrey;
+			border-left: 1px solid lightgrey;
 		}
 
+		.account-navigation > .nav-item > a {
+			font-size: 0.85rem;
+			padding: 10px 0;
+		}
+
+		.account-navigation .nav-item:hover {
+			opacity: 0.8;
+			background-color: lightgrey;
+		}
 	</style>
 </head>
 <body>
@@ -47,21 +59,25 @@
 		<ul class="nav nav-pills nav-justified account-navigation">
 		    <li class="nav-item">
 		        <a class="nav-link {% if nav == 'account' %}active{% endif %}" href="/company-account/">
+		        	<i class="far fa-user-circle mr-1"></i>
 		        	Account
 		    	</a>
 		    </li>
 		    <li class="nav-item">
 		        <a class="nav-link {% if nav == 'job_post' %}active{% endif %}" href="/job-posts/">
+		        	<i class="fas fa-briefcase mr-1"></i>
 		        	Job Posts
 		        </a>
 		  	</li>
 		    <li class="nav-item">
 		        <a class="nav-link {% if nav == 'new_job_post' %}active{% endif %}" href="/job-posts/new/">
+		        	<i class="far fa-plus-square mr-1"></i>
 		        	New Job Post
 		        </a>
 		    </li>
 		    <li class="nav-item">
 		    	<a class="nav-link {% if nav == 'messages' %}active{% endif %}" href="/messages/">
+		    		<i class="far fa-envelope mr-1"></i>
 		    		Messages
 		    	</a>
 		  	</li>
