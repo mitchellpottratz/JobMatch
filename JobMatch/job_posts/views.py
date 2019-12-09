@@ -121,12 +121,20 @@ def show_match(request, job_post_id, match_id):
 	# gets the candidates skills
 	skills = candidate_info.skills.all()
 
+	# gets the candidate users experiences
+	experiences = match.candidate_user.experiences
+
+	# gets the candidate users projects
+	projects = match.candidate_user.projects
+
 	# data being passed to template
 	context = {
 		'job_post': job_post,
 		'match': match,
 		'candidate_info': candidate_info,
-		'skills': skills
+		'skills': skills,
+		'experiences': experiences,
+		'projects': projects
 	}
 	return render(request, 'job_posts/show_match.html', context)
 

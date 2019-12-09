@@ -47,10 +47,34 @@
 	<div class="col-8">
 		<div class="card card-body">
 			<h5 class="card-title">Experience</h5>
+
+			<!-- if the candidate has atleast one experience -->
+			{% if experiences.count > 0 %}
+
+
+			<!-- if the candidate doesnt have any experiences -->
+			{% else %}
+			<p class="text-center text-muted">
+				This candidate has not added any experiences yet
+			</p>
+			{% endif %}
+
 		</div>
 
 		<div class="card card-body mt-3">
 			<h5 class="card-title">Projects</h5>
+
+			<!-- if the candidate has atleast one project -->
+			{% if experiences.count > 0 %}
+
+
+			<!-- if the candidate doesnt have any projects -->
+			{% else %}
+			<p class="text-center text-muted">
+				This candidate has not added any projects yet
+			</p>
+			{% endif %}
+
 		</div>
 	</div>	
 
