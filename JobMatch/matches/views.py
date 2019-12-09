@@ -284,17 +284,24 @@ def candidate_matches(request):
 # this view display one of the candidate users matches
 @login_required
 def show_match(request, id):
-
 	# gets the match
 	match = get_object_or_404(Match, id=id)
 
 	# gets the job post from the match
 	job_post = match.job_post
 
+	# gets the company the job post belongs to
+	company = job_post.company_account
+
+	# gets all of the job posts skills
+	skills = job_post.skills.all()
+
 	# data being passed to the template
 	context = {
 		'match': match,
-		'job_post': job_post
+		'job_post': job_post,
+		'company': company,
+		'skills': skills
 	}
 	return render(request, 'matches/show_match.html', context)
 
