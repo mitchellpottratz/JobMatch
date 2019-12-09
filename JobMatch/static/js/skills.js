@@ -62,19 +62,77 @@ $('#skill-search-results').on('click', function(e) {
 	$skillSearchResultContainer.hide()
 })
 
-// listens for the add skill button to be clicked
-$('#add-skill-btn').on('click', (e) => {
-	e.preventDefault()
-	const skillText = $('#skill-search').val()
-	$('#skill-search').val('')
-	const $skill = $('<span class="badge badge-primary mr-1 p-2">' + skillText + '</span>')
-	$('#added-skills-container').append($skill)
+// holds the text of the skill being hovered over
+let skillText
 
-	const $selectedSkill = $('#skills-hidden-input option').filter(function(i, e) { 
-		return $(e).text() === skillText
-	})
-	$selectedSkill.prop('selected', true)
+// holds the width of the badge that is being hovered
+let skillBadgeWidth
+
+// listens for the mouse to enter or leave a skill badge
+$('.skill-badge').hover(
+
+    // function excecutes when the mouse enters
+    function() {
+        skillText = $(this).text().trim()
+        skillBadgeWidth = $(this).css('width')
+        $(this).addClass('skill-badge-hover')
+        $(this).css('width', skillBadgeWidth)
+        $(this).html('<i class="fas fa-trash-alt"></i>')
+
+    // function executes when the mouse leaves
+    }, function() {
+        $(this).removeClass('skill-badge-hover')
+        $(this).text(skillText)
+    })
+
+// listens for a skill badge to be clicked    
+$('.skill-badge').on('click', function() {
+    const $skillBadge = $(this)
+    // make ajax call to delete the skill
+    $.ajax({
+        url: '/skills/delete/' + skillText + '/',
+        method: 'POST',
+        data: {
+          'data_id': $(this).attr('dataId'),
+          'csrfmiddlewaretoken': $skillBadge.attr('csrfToken')
+        },
+        dataType: 'json',
+        success:function(data) {
+            // removes the skill from the DOM
+            $skillBadge.remove()
+
+            // removes the skills parent element from the DOM
+            $skillBadge.parent().remove()
+
+            // shows a notification
+            showNotification(data.message, '#skillNotification')
+        }
+    })
 })
+
+// shows a notification
+showNotification = (text, id) => {
+    $(id).text(text)
+    $(id).fadeIn(500)
+
+    // hides the notification after 2 seconds
+    setTimeout(function(){
+        $('.notification').fadeOut(500)
+    }, 2000)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
