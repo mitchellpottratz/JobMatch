@@ -1,9 +1,19 @@
+
 const $skillSearchResultContainer = $('#skills-results-container')
 const $skillSearchResults = $('#skill-search-results')
 
 // listens for change in the find skills input text
-$('#skill-search').keyup(function() {
-	$skillSearchResultContainer.show()
+$('#skill-search').keyup(function(e) {
+
+	// if there is nothing in the search input and the user hit the backpace
+	// or delete keys, the search results box is hidden
+	if ($(this).val().length < 1 && e.keyCode === 8 || e.keyCode === 46) {
+		$skillSearchResultContainer.hide()
+
+	// otherwise show the search results box
+	} else {
+		$skillSearchResultContainer.show()
+	}
 
 	// sends a request to search for skills based on the current 
 	// value of the skill search input
@@ -30,10 +40,16 @@ $('#skill-search').keyup(function() {
 
 	        // if there are no results
 	        } else {
-	        	$skillSearchResults.append($('<p class="text-center">No Results</p>'))
+	        	// hides the results container
+	        	$skillSearchResultContainer.hide()
 	        }		        	
         }
-		})	
+	})	
+})
+
+// listens for a skill result to be clicked
+$('#skill-search-results').on('click', function(e) {
+    $skillSearchResultContainer.hide()
 })
 
 // listens for a skill result to be clicked

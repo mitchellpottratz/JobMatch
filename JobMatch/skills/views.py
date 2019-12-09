@@ -10,7 +10,9 @@ from candidate_users.models import CandidateInfo
 
 # creates a new skill
 @login_required
-def add(request):
+def add_candidate_skill(request):
+
+	# gets all of the candidates skills
 
 	# POST is the only method allowed for this view 
 	if request.method == 'POST':
@@ -35,6 +37,13 @@ def add(request):
 		candidate_info.save()
 
 	return render(request, 'skills/new.html')
+
+
+# adds a skill to a job post
+@login_required()
+def add_job_post_skill(request, id):
+	return render(request, 'skills/new_job_post_skill.html')
+
 
 
 # searches through the skills

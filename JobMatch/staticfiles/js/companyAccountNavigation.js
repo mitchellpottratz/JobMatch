@@ -1,10 +1,18 @@
 
-// gets the current url path
-const currentPath = window.location.pathname
-
-$(".account-navigation a[href='" + currentPath + "']").addClass('active')
-// console.log($('.account-navigation a[href=' + currentPath + ']'))
-
+switch (window.location.pathname) {
+	case '/company-account/':
+		$('#account-link').addClass('active')
+		break
+	case '/job-posts/':
+		$('#job-posts-link').addClass('active')
+		break
+	case '/job-posts/new/':
+		$('#new-job-post-link').addClass('active')
+		break
+	case '/notifications/':
+		$('#notifications-link').addClass('active')
+		break
+}
 
 
 

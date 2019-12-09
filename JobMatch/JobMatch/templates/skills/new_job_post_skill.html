@@ -16,27 +16,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.min.css" integrity="sha256-XPTBwC3SBoWHSmKasAk01c08M6sIA5gF5+sRxqak2Qs=" crossorigin="anonymous" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/js/tempusdominus-bootstrap-4.min.js" integrity="sha256-z0oKYg6xiLq3yJGsp/LsY9XykbweQlHl42jHv2XTBz4=" crossorigin="anonymous"></script>
 
-<style type="text/css">
-    #skills-results-container {
-        display: none;
-        z-index: 2;
-        width: 100%;
-        max-height: 150px;
-        overflow-y: scroll;
-        position: absolute;
-    }
-
-    .skill-result {
-        border-top: 1px solid lightgrey;
-        padding-top: 10px;
-    }
-
-    .skill-result:hover {
-        cursor: pointer;
-        opacity: 0.7;
-    }
-</style>
-
 {% endblock %}
 
 {% block body %}
@@ -50,31 +29,20 @@
           <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <form method="POST">
-
             	<div class="form-group">
-
-
-                    <small class="mb-4">
-                        Begin by searching for a skill you would like to add and results will begin to pop up. If you see 
-                        the skill you want to add, click it, then press the "Add Skill" button. If it does not pop up, type 
-                        out the whole skill and press the "Add Skill" button.
-                    </small>
-                    <input type="text" class="form-control mt-3 mr-1" id='skill-search' name="skill-name" autocomplete="off"
-                           placeholder="Start by searching for a skill...">
-   
-
-					<div class="card" id="skills-results-container">
-						<p class="text-muted text-center">Results</p>
-						<div id="skill-search-results">
-						</div>
-					</div>
-
+      					<input type="text" class="form-control mr-1" id='skill-search' name="skill-name">
+      					<div class="card" id="skills-results-container">
+      						<p class="text-muted text-center">Results</p>
+      						<div id="skill-search-results">
+      						</div>
+      					</div>
             	</div>
-
             	<input type="submit" class="btn btn-primary" value="Add Skill">
             </form>
-
           </form>
+
+          
+
         </div>
       </div>
 
@@ -83,14 +51,4 @@
 
     <!-- script for adding skills to the job post -->
 	<script type="text/javascript" src="{% static 'js/skills.js' %}"></script>
-
-    <script type="text/javascript">
-
-        
-    </script>
 {% endblock %}
-
-
-
-
-
