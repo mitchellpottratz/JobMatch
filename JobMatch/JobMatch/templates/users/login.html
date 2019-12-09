@@ -1,16 +1,16 @@
 {% extends 'users/base.html' %}
 
-{% block title %}<title>Company User Registration</title>{% endblock %}
+{% block title %}<title>Login</title>{% endblock %}
 
 {% block body %}
 	<div class="row">
-		<div class="col-3"></div>
-
-		<div class="col-6">
+		<div class="col-0 col-md-2"></div>
+		<div class="col-12 col-md-8">
 			<div class="card w-100">
 				<div class="card-body">
 			    	<h5 class="card-title">Login</h5>
 
+			    	<!-- form error messages -->
 			    	{% if messages %}
 						{% for message in messages %}
 							<small class="text-danger text-center">
@@ -18,28 +18,22 @@
 							</small>
 						{% endfor %}
 					{% endif %}
-			    	
+
 			    	<form method="POST">
 			    		{% csrf_token %}
-
 			    		<div class="form-group">
 			    			<label for="username">Username</label>
 			    			<input type="text" class="form-control" name="username">
 			    		</div>
-
 			    		<div class="form-group">
 			    			<label for="password">Password</label>
 			    			<input type="password" class="form-control" name="password">
 			    		</div>
-
 			    		<input type="submit" class="btn btn-primary" value="Login">
 			    	</form>
-
 			  	</div>
 			</div>
 		</div>
-
-		<div class="col-3"></div>
+		<div class="col-0 col-md-2"></div>
 	</div>
-
 {% endblock %}
