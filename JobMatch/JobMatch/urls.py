@@ -41,13 +41,21 @@ urlpatterns = [
 
     # text editor package
     path('tinymce/', include('tinymce.urls')),
-] 
+]  
 
 # configures path for static files
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 # configures the path for where images will be updated to
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += [
+        path('__debug__/', include(debug_toolbar.urls))
+    ]
 
 
 

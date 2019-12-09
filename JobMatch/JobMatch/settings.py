@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'location_field.apps.DefaultConfig',
     'phone_field',
     'tinymce', # text editor
+    'debug_toolbar', # for testing performance
 ]
 
 MIDDLEWARE = [
@@ -51,7 +52,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
+
+# required to list ip address by django_toolbar
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
+
 
 ROOT_URLCONF = 'JobMatch.urls'
 
