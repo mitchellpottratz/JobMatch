@@ -43,7 +43,7 @@ def new_job_post(request):
 			job_post.save()
 
 			# redirects to url to create matches
-			return redirect('/matches/create/' + str(job_post.id) + '/')
+			return redirect('/skills/create/job-post/' + str(job_post.id) + '/')
 
 		# if the form wasnt valid
 		else:
