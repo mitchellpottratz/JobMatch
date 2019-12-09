@@ -20,7 +20,11 @@ $('#skill-search').keyup(function(e) {
 	$.ajax({
         url: '/skills/search/',
         data: {
-          'skill_string': $(this).val()  
+          'skill_string': $(this).val(),
+
+          // if a company user is searching then this is a 
+          // job post id, otherwise its empty
+          'data_id': $(this).attr('dataId')   
         },
         dataType: 'json',
         success: function (data) {

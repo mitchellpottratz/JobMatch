@@ -93,15 +93,34 @@ def create_job_post_skill(request, id):
 @login_required
 def search(request):
 	# gets the current user
+	user = request.user
+	results_list = []
 
 	# get the search string from the ajax call
 	skill = request.GET.get('skill_string')
 
-	# searches for skills based on the string
-	results = Skill.objects.filter(name__icontains=skill)
+	# if the current user is a candidate user
+	if user.candidate_user:
+		# searches for skills based on the string
+		results = Skill.objects.filter(name__icontains=skill).exclude(
+				id__in=CandidateInfo.objects.get(user=user).skills.all().values('id')
+			)
 
-	# converts the results to a list of skill names
-	results_list = [model_to_dict(result)['name'] for result in results]
+		# converts the results to a list of skill names
+		results_list = [model_to_dict(result)['name'] for result in results]
+
+	# if the current user is a company user
+	else:
+		# gets the job post the user is searching for skills on
+		job_post = JobPost.objects.get(id=request.GET.get('data_id'))
+
+		# searches for skills 
+		results = Skill.objects.filter(name__icontains=skill).exclude(
+				id__in=job_post.skills.all().values('id')
+			)
+
+		# converts the results to a list of skill names
+		results_list = [model_to_dict(result)['name'] for result in results]
 
 	return JsonResponse({'results': results_list})
 
