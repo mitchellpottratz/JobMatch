@@ -12,8 +12,11 @@ from candidate_users.models import CandidateInfo
 @login_required
 def add_candidate_skill(request):
 
+	# gets the current user
+	user = request.user
+
 	# gets all of the candidates skills
-	users_skills = CandidateInfo.objects.get(user=request.user).skills.all()
+	users_skills = CandidateInfo.objects.get(user=user).skills.all()
 
 	# POST is the only method allowed for this view 
 	if request.method == 'POST':
@@ -37,11 +40,16 @@ def add_candidate_skill(request):
 		candidate_info.skills.add(skill)
 		candidate_info.save()
 
-	return render(request, 'skills/new.html', {'users_skills': users_skills})
+	# data being passed into the template
+	context = {
+		'user': user,
+		'users_skills': users_skills
+	}
+	return render(request, 'skills/new.html', context)
 
 
 # adds a skill to a job post
-@login_required()
+@login_required
 def add_job_post_skill(request, id):
 	return render(request, 'skills/new_job_post_skill.html')
 
@@ -61,6 +69,43 @@ def search(request):
 	results_list = [model_to_dict(result)['name'] for result in results]
 
 	return JsonResponse({'results': results_list})
+
+
+@login_required
+def delete_skill(request, id):
+	# gets the current user
+	user = request.user
+	
+	data = {}
+
+	# if the method is post
+	if request.method == 'POST':
+
+		# if it is a candidate user deleting the skill
+		if user.candidate_user:
+			print('candidate user deleting skill')
+
+			# deletes the skill from the candidate users candidate info
+			candidate_info = CandidateInfo.objects.get(user=user).skills.get(id=id)
+			candidate_info.delete()
+			candidate_info.save()
+			print('skill deleted')
+			data = {
+				'message': 'Skill successfully deleted'
+			}
+
+		# if it is a company user deleting a skill from a job post
+		else:
+			print('company user deleting skill')
+
+	# if the method is not post
+	else:
+		data = {
+			'message': 'Method not allowed'
+		}
+
+	return JsonResponse(data)
+
 
 
 

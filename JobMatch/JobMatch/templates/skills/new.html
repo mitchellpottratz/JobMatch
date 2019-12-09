@@ -35,6 +35,11 @@
         cursor: pointer;
         opacity: 0.7;
     }
+
+    .skill-badge-hover {
+        background-color: red;
+        cursor: pointer;
+    }
 </style>
 
 {% endblock %}
@@ -72,7 +77,8 @@
             <div class="row">
                 {% for skill in users_skills %}
                 <div class="col-3 mt-2">
-                    <span class="badge badge-primary py-2 w-100 skill-badge">
+                    <span class="badge badge-primary py-2 w-100 skill-badge" skillId="{{ skill.id }}"
+                          userId="{{ user.id }}" csrfToken="{{ csrf_token }}">
                         {{ skill.name }}
                     </span>
                 </div>
@@ -88,7 +94,43 @@
 
 <script type="text/javascript">
 
+    // holds the text of the skill being hovered over
+    let skillText
+
+    // listens for the mouse to enter or leave a skill badge
+    $('.skill-badge').hover(
+
+        // function excecutes when the mouse enters
+        function() {
+            skillText = $(this).text().trim()
+            $(this).addClass('skill-badge-hover')
+            $(this).text('Delete')
     
+        // function executes when the mouse leaves
+        }, function() {
+            $(this).removeClass('skill-badge-hover')
+            $(this).text(skillText)
+        })
+
+    // listens for a skill badge to be clicked    
+    $('.skill-badge').on('click', function() {
+        console.log('skill clicked')
+
+        // make ajax call to delete the skill
+        $.ajax({
+            url: '/skills/delete/' + $(this).attr('skillId') + '/',
+            method: 'POST',
+            data: {
+              'user_id': $(this).attr('userId'),
+              'csrfmiddlewaretoken': $(this).attr('csrfToken')
+            },
+            dataType: 'json',
+            success:function(data) {
+                console.log('success data:', data)
+                $(this).remove()
+            }
+        })
+    })
 </script> 
 {% endblock %}
 
