@@ -11,7 +11,7 @@ from skills.models import Skill
 class CandidateInfo(models.Model):
 
 	# one to one relationship to a user
-	user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+	user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='candidate_info')
 	
 	# where the users lives
 	location = models.CharField(max_length=250, blank=True, null=True)

@@ -7,9 +7,13 @@
 {% endblock %}
 
 {% block body %}
-<div class="card vh-100 px-4">
+<div class="card px-4">
 	<div class="card-body">
-	<h5 class="">{{ match.get_candidate_email }}</h5>
+		<div class="d-flex justify-content-center">
+			<img src="/media/users/default_profile_picture.png/" width="35" height="35" class="rounded-circle mr-3" 
+				 alt="user profile image">
+			<h4 class="align-self-center">{{ match.get_candidate_full_name }}</h4>
+		</div>
 	</div>
 </div>
 {% endblock %}
