@@ -10,7 +10,7 @@ class User(AbstractUser):
 	username = models.CharField(max_length=155, unique=True, blank=True)
 
 	# profile picture
-	image = models.ImageField(blank=True)
+	image = models.ImageField(upload_to='users/', default='users/default_profile_picure.png')
 
 	# if the user is apart of a company, a user that creates 
 	# job postings for a company
