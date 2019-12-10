@@ -7,7 +7,8 @@
 {% load static %}
 
 <style type="text/css">
-	.project-container {
+	.project-container,
+	.experience-container {
 		padding: 15px 5px;
 		border-top: 1px solid lightgrey;
 	
@@ -59,7 +60,31 @@
 						{% if experiences.count > 0 %}
 
 						{% for experience in experiences %}
-							{{ experience }}
+						<div class="experience-container mt-2">
+							<div class="d-flex justify-content-between pb-2">
+								<h6>{{ experience.title }}</h6>
+								<a href="/experience/edit/{{ experience.id }}/">Edit</a>
+							</div>
+							<small class="text-muted">
+								<i class="fas fa-briefcase mr-1"></i>
+								{{ experience.employment_type }}
+							</small>
+							<small class="text-muted d-block mt-1">
+								<i class="fas fa-map-marker-alt mr-1"></i>
+								{{ experience.company }} - {{ experience.location }}
+							</small>
+							<small class="text-muted pb-3">
+								<i class="fas fa-business-time mr-1"></i>
+								{{ experience.start_date }} - {{ experience.end_date }}
+							</small>
+
+							<div class="mt-2">
+								<small>
+									{{ experience.description | safe }}
+								</small>
+							</div>
+						
+						</div>
 						{% endfor %}
 
 						{% else %}
