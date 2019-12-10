@@ -6,6 +6,14 @@
 
 {% load static %}
 
+<style type="text/css">
+	.project-container {
+		padding: 15px 5px;
+		border-top: 1px solid lightgrey;
+	
+	}
+</style>
+
 {% endblock %}
 
 {% block body %}
@@ -23,53 +31,91 @@
 		  	</div>
 		</div>
 
-		<div class="card mt-4">
-			<div class="card-body">
-				<h5 class="card-title">Projects</h5>
-				{% if projects %}
+		<div class="row">
+			<div class="col-12 col-md-4">
+				<div class="card mt-4">
+					<div class="card-body">
+						<h5>Skills</h5>
+						
+						{% if skills.count > 0 %}
 
-					{% for project in projects %}
-						{{project}}
-					{% endfor %}
+						{% for skill in skills %}
+							{{ skill }}
+						{% endfor %}				
 
-				{% else %}
-					<p class="text-center text-muted">no project</p>
-				{% endif %}
-			</div>	
-		</div>
+						{% else %}
+							<p class="text-center text-muted">You do not have any skills added</p>
+						{% endif %}
+						<a href="/skills/add/">Add Skills</a>
+					</div>
+				</div>	
+			</div>
 
-		<div class="card mt-4">
-			<div class="card-body">
-				<h5 class="card-title">Experiences</h5>
-				{% if experiences %}
+			<div class="col-12 col-md-8">
 
-				{% for experience in experiences %}
-					{{ experience }}
-				{% endfor %}
+				<div class="card mt-4">
+					<div class="card-body">
+						<h5 class="card-title">Experiences</h5>
+						{% if experiences.count > 0 %}
 
-				{% else %}
-					<p class="text-center text-muted">no experiences</p>
-				{% endif %}
+						{% for experience in experiences %}
+							{{ experience }}
+						{% endfor %}
+
+						{% else %}
+							<p class="text-center text-muted">You have not added any experiences yet</p>
+						{% endif %}
+					</div>
+				</div>
+
+				<div class="card mt-4">
+					<div class="card-body">
+						<h5 class="card-title">Projects</h5>
+						{% if projects.count > 0 %}
+
+						{% for project in projects %}
+						<div class="project-container mt-3">
+							<div class="d-flex justify-content-between pb-2">
+								<div class="d-flex justify-content-center">
+									<img src="{{ project.image.url }}" width="30" height="30" class="rounded-circle mr-2" alt="project image"/>
+									<h6 class="align-self-center">{{ project.title }}</h6>
+								</div>	
+								<a href="/projects/edit/{{ project.id }}/">Edit</a>
+							</div>
+							
+							<small class="text-muted">
+								<i class="fas fa-map-marker-alt mr-1"></i>
+								{{ project.associated_with }}
+							</small>
+							<small class="d-block text-muted pb-3">
+								<i class="fas fa-business-time mr-1"></i>
+								{{ project.start_date }} - {{ project.end_date }}
+							</small>
+							<div class="mt-2">
+								<small>
+									{{ project.description | safe }}
+								</small>
+							</div>
+							
+						
+							<small>
+								<a href="{{ project.url }}" target="_blank">
+									<i class="fas fa-link mr-1"></i>
+									Link To Project
+								</a>
+							</small>
+						
+						</div>
+						{% endfor %}
+
+						{% else %}
+							<p class="text-center text-muted">You have not added any projects yet</p>
+						{% endif %}
+					</div>	
+				</div>	
+					
 			</div>
 		</div>
-
-		<div class="card mt-4">
-			<div class="card-body">
-				<h5>Skills</h5>
-				
-				{% if skills.count > 0 %}
-
-				{% for skill in skills %}
-					{{ skill }}
-				{% endfor %}				
-
-				{% else %}
-					<p class="text-center text-muted">You do not have any skills added</p>
-				{% endif %}
-				<a href="/skills/add/">Add Skills</a>
-			</div>
-		</div>
-
 	</div>
 
 {% endblock %}
