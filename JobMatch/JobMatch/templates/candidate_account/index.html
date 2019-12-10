@@ -13,6 +13,13 @@
 		border-top: 1px solid lightgrey;
 	
 	}
+	.new-icon {
+		font-size: 1.2rem;
+	}
+
+	.new-icon:hover {
+		opacity: 0.6;
+	}
 </style>
 
 {% endblock %}
@@ -36,27 +43,38 @@
 			<div class="col-12 col-md-4">
 				<div class="card mt-4">
 					<div class="card-body">
-						<h5>Skills</h5>
-						
+						<div class="d-flex justify-content-between">
+							<h5>Skills</h5>
+							<a href="/skills/add/">
+								<i class="fas fa-plus new-icon mr-1"></i>	
+							</a>
+						</div>
 						{% if skills.count > 0 %}
-
+						<div class="d-flex flex-wrap mt-2">
 						{% for skill in skills %}
-							{{ skill }}
-						{% endfor %}				
-
+							<span>
+			                    <span class="badge badge-primary py-2 mr-3 mt-2 skill-badge">
+			                        {{ skill.name }}
+			                    </span>
+                			</span>
+						{% endfor %}	
+						</div>			
 						{% else %}
-							<p class="text-center text-muted">You do not have any skills added</p>
+							<p class="text-center text-muted">You have not added any skills yet</p>
 						{% endif %}
-						<a href="/skills/add/">Add Skills</a>
 					</div>
 				</div>	
 			</div>
 
 			<div class="col-12 col-md-8">
-
 				<div class="card mt-4">
 					<div class="card-body">
-						<h5 class="card-title">Experiences</h5>
+						<div class="d-flex justify-content-between">
+							<h5 class="card-title">Experiences</h5>
+							<a href="/experience/new/">
+								<i class="fas fa-plus new-icon mr-1"></i>
+							</a>
+						</div>
 						{% if experiences.count > 0 %}
 
 						{% for experience in experiences %}
@@ -86,7 +104,6 @@
 						
 						</div>
 						{% endfor %}
-
 						{% else %}
 							<p class="text-center text-muted">You have not added any experiences yet</p>
 						{% endif %}
@@ -95,9 +112,13 @@
 
 				<div class="card mt-4">
 					<div class="card-body">
-						<h5 class="card-title">Projects</h5>
+						<div class="d-flex justify-content-between">
+							<h5>Projects</h5>
+							<a href="/projects/new/">
+								<i class="fas fa-plus new-icon mr-1"></i>	
+							</a>
+						</div>
 						{% if projects.count > 0 %}
-
 						{% for project in projects %}
 						<div class="project-container mt-3">
 							<div class="d-flex justify-content-between pb-2">
