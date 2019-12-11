@@ -18,7 +18,7 @@ def index(request):
 
 	# gets all of the companies users excluding the current user
 	company_users = company.users.all().exclude(id=user.id)
-	print('company admin:', company.admin)
+
 	# if the current user is the admin
 	if company.admin == user:
 		is_admin = True
