@@ -147,7 +147,7 @@ STATICFILES_DIRS = (
 )
 
 #  configuration for static files storage using whitenoise
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # configures folder for storing images
 MEDIA_URL = '/media/'
