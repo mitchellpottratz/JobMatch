@@ -1,4 +1,5 @@
 import os
+import dj_database_url 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -7,13 +8,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'myjq#w4rmci3e#ebxh*!g(3b)s#k38jv4$zo+yb^bwdapar5@1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['JobMatch.herokuapp.com']
+if DEBUG == True: 
+    SECRET_KEY = 'myjq#w4rmci3e#ebxh*!g(3b)s#k38jv4$zo+yb^bwdapar5@1'
+else:
+    SECRET_KEY = os.environ.get('SECRET_KEY')
+
+ALLOWED_HOSTS = ['job-matching.herokuapp.com']
 
 
 # Application definition
@@ -95,7 +99,6 @@ DATABASES = {
 }
 
 # production database configuration
-import dj_database_url 
 prod_db  =  dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(prod_db)
 
