@@ -7,22 +7,32 @@
 {% endblock %}
 
 {% block body %}
-<div class="card vh-100 px-4">
-	<div class="card-body">
-	<h5 class="">Matches For {{ job_post.job_title }}</h5>
-		<div class="list-group mt-4">
-			{% for match in matches %}
-			<a href="/job-posts/{{ job_post.id }}/matches/{{ match.id }}/" class="list-group-item list-group-item-action py-3">	
-				<div class="d-flex w-100 justify-content-between">
-					<div class="d-flex">
-						<img src="/media/users/default_profile_picture.png/" width="35" height="35" class="rounded-circle mr-3" alt="user profile image">
-	      				<h5 class="mb-1">{{ match.candidate_user.get_full_name }}</h5>
-					</div>
-      				<small class="text-muted">{{ match.candidate_liked_timestamp }}</small>
-    			</div>
-			</a>
-			{% endfor %}
+<div class="card card-body">
+	<div class="d-flex justify-content-between">
+		<h4>Matches For {{ job_post.job_title }}</h4>
+		<a href="/matches/{{ post.id }}/"><i class="fas fa-plus new-icon mr-1"></i></a>
+	</div>
+</div>
+<div class="row">
+	{% for match in matches %}
+	<div class="col-12 col-md-6 col-lg-4 mt-4">
+		<div class="card">
+			<div class="card-header d-flex justify-content-between">
+				<img src="/media/users/default_profile_picture.png/" width="35" height="35" class="rounded-circle mr-3" alt="user profile image">
+	      		<h5 class="mb-1">{{ match.candidate_user.get_full_name }}</h5>
+			</div>
+			<div class="card-body">
+				<small class="text-muted">
+					<i class="fas fa-business-time mr-1"></i>
+					{{ match.candidate_liked_timestamp }}
+				</small>
+
+				<a href="/job-posts/{{ job_post.id }}/matches/{{ match.id }}/" class="btn btn-sm btn-primary mt-4">
+					View Candidate
+				</a>
+			</div>
 		</div>
 	</div>
+	{% endfor %}
 </div>
 {% endblock %}
