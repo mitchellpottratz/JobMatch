@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
+from .managers import CompanyQuerySet
 
 
 # this model represents a company that CompanyUsers are 
@@ -17,6 +18,12 @@ class Company(models.Model):
 
 	# time the comany was created
 	timestamp = models.DateTimeField(default=timezone.now())
+
+	# query manager
+	objects = CompanyQuerySet.as_manager()
+
+	def __str__(self):
+		return self.name
 
 
 

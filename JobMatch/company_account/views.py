@@ -14,12 +14,23 @@ def index(request):
 	user = request.user
 
 	# gets the users company
-	company = request.user.company_account
+	company = user.company_account
+
+	# gets all of the companies users excluding the current user
+	company_users = company.users.all().exclude(id=user.id)
+	print('company admin:', company.admin)
+	# if the current user is the admin
+	if company.admin == user:
+		is_admin = True
+	else:
+		is_admin = False
 
 	# data being passed into the template
 	context = {
 		'user': user,
 		'company': company,
+		'company_users': company_users, 
+		'is_admin': is_admin,
 		'nav': 'account'
 	}
 	return render(request, 'company_account/index.html', context)

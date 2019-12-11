@@ -2,7 +2,14 @@
 
 {% block title %}<title>Company User Dashboard</title>{% endblock %}
 
-{% block head %}{% endblock %}
+{% block head %}
+<style type="text/css">
+	.users-list > div {	
+		padding: 10px 0;
+		border-top: 1px solid lightgrey;
+	}
+</style>
+{% endblock %}
 
 {% block body %}
 	
@@ -27,16 +34,77 @@
 
 <div class="row">
 	<div class="col-12 col-md-4">
+
+		<!-- if the current user is the company admin, they will be given access to the remove users button -->
+		{% if is_admin %}
 		<div class="card mt-4">
 			<div class="card-body">
 				<h5 class="card-title">Company Users</h5>
+				<div class="users-list">
+					{% for user in company_users %}
+					<div class="d-flex justify-content-between">
+						<small class="align-self-center">{{ user.get_full_name }}</small>
+						<small>
+							<a href="" class="align-self-center text-danger">Remove</a>
+						</small>
+					</div>	
+					{% endfor %}
+				</div>
 			</div>
 		</div>
+
+		<!-- if the current user is not the admin, they will only be able to see users -->
+		{% else %}
+		<div class="card mt-4">
+			<div class="card-body">
+				<h5 class="card-title">Company Users</h5>
+				<div class="users-list">
+					{% for user in company_users %}
+					<div>
+						<small>{{ user.get_full_name }}</small>
+					</div>	
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		{% endif %}
+
+
 	</div>
 </div>
+
+
+<!-- remove user modal -->
+<!-- {% if is_admin %}
+<div class="modal" tabindex="-1" role="dialog" id="contactInfoModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  		<div class="modal-dialog" role="document">
+  			<div class="modal-content">
+      			<div class="modal-header">
+      				<h5 class="modal-title">Contact Info</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+      			</div>
+      			<div class="modal-body text-center text-muted">
+      				<p>
+      					<i class="far fa-envelope mr-1"></i>
+      					{{ user.email }}
+      				</p>	
+      				<p>
+      					<i class="fas fa-phone mr-1"></i>
+      					{{ user_info.phone_number }}
+      				</p>
+      			</div>
+      			<div class="modal-footer">
+      				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        			<a href="#" class="btn btn-primary">Edit Contact Info</a>	
+      			</div>
+      		</div>	
+  		</div>
+  	</div>
 		
 	
-{% endblock %}
+{% endblock %} -->
 
 
 
