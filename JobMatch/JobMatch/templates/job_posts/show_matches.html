@@ -9,7 +9,8 @@
 {% block body %}
 <div class="card card-body">
 	<div class="d-flex justify-content-between">
-		<h4>Matches For {{ job_post.job_title }}</h4>
+		<a href="/job-posts/">Back</a>
+		<h5>Matches For {{ job_post.job_title }}</h5>
 		<a href="/matches/{{ post.id }}/"><i class="fas fa-plus new-icon mr-1"></i></a>
 	</div>
 </div>
@@ -26,7 +27,6 @@
 					<i class="fas fa-business-time mr-1"></i>
 					{{ match.candidate_liked_timestamp }}
 				</small>
-
 				<a href="/job-posts/{{ job_post.id }}/matches/{{ match.id }}/" class="btn btn-sm btn-primary mt-4">
 					View Candidate
 				</a>
