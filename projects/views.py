@@ -65,7 +65,7 @@ def edit(request, id):
 	else:
 		form = ProjectForm(instance=project)
 
-	return render(request, 'projects/new.html', {'form': form})
+	return render(request, 'projects/edit.html', {'form': form})
 
 
 
