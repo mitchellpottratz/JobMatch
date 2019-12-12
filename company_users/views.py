@@ -43,7 +43,7 @@ def join(request):
 			user.company_account = company
 			user.save()
 
-			return redirect('/company-account/index')
+			return redirect('/company-account/')
 
 		# if the invite code does not exist 	
 		except ObjectDoesNotExist:
