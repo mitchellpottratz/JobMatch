@@ -23,6 +23,11 @@ class CandidateInfoForm(ModelForm):
 			'id': 'location-input'
 		})
 
+		# add bootstrap file input style to resume file input
+		self.fields['resume'].widget.attrs.update({
+			'class': 'custom-file-input'
+		})
+
 
 
 

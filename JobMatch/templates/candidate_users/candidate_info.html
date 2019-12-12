@@ -14,7 +14,6 @@
 {% block body %}
 	<div class="row">
 		<div class="col-3"></div>
-
 		<div class="col-6">
 			<div class="card">
 				<div class="card-body">
@@ -30,6 +29,14 @@
 						<div class="form-group">
 							<label>Headline</label>
 							{{ form.headline }}
+						</div>
+
+						<div class="form-group">
+							<label>Upload Your Resume</label>
+							<div class="custom-file">
+	  							{{ form.resume }}
+	  							<label class="custom-file-label" for="customFile">Choose a File</label>
+	  						</div>
 						</div>
 
 						<div class="form-group">
