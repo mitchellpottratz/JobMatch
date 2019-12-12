@@ -9,9 +9,10 @@
 {% block body %}
 	<div class="card w-100 vh-100">
 		<div class="card-body">
+		<a href="/company-account/">Back</a>
 			{% if match is not None %}
 
-				<div class="w-100 overflow-auto h-75 p-3 border border-secondary rounded" id="view-candidate-container">
+				<div class="w-100 overflow-auto h-75 p-3 mt-3 border border-secondary rounded" id="view-candidate-container">
 					<div class="row h-100 py-3">
 
 						<div class="col col-12 col-md-6 h-100 overflow-auto border-right border-right-secondary text-center">
@@ -108,11 +109,13 @@
 					</a>
 				</div>					
 			{% else %}
-				<i class="fas fa-exclamation text-danger" style="font-size: 7rem; margin-bottom: 25px;"></i>
-				<h4>We do not have any matches to show you</h4>
-				<p class="">
-					Come back later and you may have more matches
-				</p>	
+				<div class="text-center">
+					<i class="fas fa-exclamation text-danger" style="font-size: 7rem; margin-bottom: 25px;"></i>
+					<h4>We do not have any matches to show you</h4>
+					<p class="">
+						Come back later and you may have more matches
+					</p>	
+					</div>
 			{% endif %}
 		</div>
 	</div>
