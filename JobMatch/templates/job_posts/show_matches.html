@@ -19,7 +19,7 @@
 	<div class="col-12 col-md-6 col-lg-4 mt-4">
 		<div class="card">
 			<div class="card-header d-flex justify-content-between">
-				<img src="/media/users/default_profile_picture.png/" width="35" height="35" class="rounded-circle mr-3" alt="user profile image">
+				<img src="{{ match.candidate_user.image.url }}" width="35" height="35" class="rounded-circle mr-3" alt="user profile image">
 	      		<h5 class="mb-1">{{ match.candidate_user.get_full_name }}</h5>
 			</div>
 			<div class="card-body">
