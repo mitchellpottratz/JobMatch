@@ -24,3 +24,8 @@ class ProjectForm(forms.ModelForm):
 			self.fields[field].widget.attrs.update({
 				'class': 'form-control'
 			})
+
+		# add boostrap image style to file input
+		self.fields['image'].widget.attrs.update({
+			'class': 'custom-file-input'
+		})
