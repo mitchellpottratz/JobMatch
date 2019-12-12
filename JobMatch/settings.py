@@ -9,11 +9,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-SECRET_KEY = os.environ.get('SECRET_KEY')
+# SECRET_KEY = os.environ.get('SECRET_KEY')
 
-# SECRET_KEY = 'myjq#w4rmci3e#ebxh*!g(3b)s#k38jv4$zo+yb^bwdapar5@1'
+SECRET_KEY = 'myjq#w4rmci3e#ebxh*!g(3b)s#k38jv4$zo+yb^bwdapar5@1'
 
     
 
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'phone_field',
     'tinymce', # text editor
     'debug_toolbar', # for testing performance
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -167,6 +168,21 @@ TINYMCE_DEFAULT_CONFIG = {
 }
 TINYMCE_SPELLCHECKER = True
 TINYMCE_COMPRESSOR = True
+
+
+# Amazon s3 configuration
+AWS_ACCESS_KEY_ID = 'AKIAUN2ZCZZEAX36TBWC'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'job-match'
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+
+# arn:aws:s3:::job-match
+
+DEFAULT_FILE_STORAGE = 'JobMatch.storage_backends.MediaStorage'
 
 
 
