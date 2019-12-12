@@ -16,10 +16,13 @@
 
 {% block body %}
     <div class="row py-4">
-      <div class="col-2"></div>
-      <div class="col-8">
+      <div class="col-md-2"></div>
+      <div class="col-12 col-md-8">
         <div class="card card-body card-margin">
-          <h5 class="card-title">New Experience</h5>
+          <div class="d-flex justify-content-between">
+            <h5 class="card-title">New Experience</h5>
+            <a href="/candidate-account/">Back</a>
+          </div>
           <form method="POST">
             {% csrf_token %}
 
@@ -43,14 +46,19 @@
               {{ form.location }}
             </div>
 
-            <div class="form-group">
-              <label>Start Date</label>
-              {{ form.start_date }}                
-            </div>
-
-            <div class="form-group">
-              <label>End Date</label>
-              {{ form.end_date }}
+            <div class="form-row">
+              <div class="col">
+                <div class="form-group">
+                  <label>Start Date</label>
+                  {{ form.start_date }}
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label>End Date</label>
+                  {{ form.end_date }}  
+                </div> 
+              </div>
             </div>
 
             <div class="form-group">
@@ -62,7 +70,7 @@
           </form>
         </div>
       </div>
-      <div class="col-2"></div>
+      <div class="col-md-2"></div>
     </div>
 
     <!-- script for google location autocomplete for the location form field -->
