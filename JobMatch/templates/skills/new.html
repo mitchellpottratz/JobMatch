@@ -11,8 +11,8 @@
 {% block body %}
 
 <div class="row py-4">
-    <div class="col-2"></div>  
-    <div class="col-8">
+    <div class="col-md-2"></div>  
+    <div class="col-12 col-md-8">
 
         <div class="card card-body">
             <form method="POST">
@@ -20,11 +20,6 @@
                 <h5>Add A Skill</h5>
                 <form method="POST">
                     <div class="form-group">
-                        <small class="mb-4">
-                            Begin by searching for a skill you would like to add and results will begin to pop up. If you see 
-                            the skill you want to add, click it, then press the "Add Skill" button. If it does not pop up, type 
-                            out the whole skill and press the "Add Skill" button.
-                        </small>
                         <input type="text" class="form-control mt-3 mr-1" id='skill-search' name="skill-name" autocomplete="off"
                                placeholder="Start by searching for a skill...">
                         <div class="card" id="skills-results-container">
@@ -56,13 +51,11 @@
             {% endif %}
         </div>
     </div> 
-    <div class="col-2"></div>      
+    <div class="col-md-2"></div>      
 </div>
-
 <!-- notification box -->
 <div class="alert alert-success notification" id="skillNotification" role="alert">
 </div>
-
 <!-- script for adding skills to the job post -->
 <script type="text/javascript" src="{% static 'js/skills.js' %}"></script>
 {% endblock %}
